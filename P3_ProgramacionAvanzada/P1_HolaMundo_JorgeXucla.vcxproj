@@ -167,10 +167,18 @@
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\Assets\BrazosConPistola.obj" />
-    <Object Include="..\Assets\CangrejoMalo.obj" />
-    <Object Include="..\Assets\Medicina.obj" />
-    <Object Include="..\Assets\Pistola.obj" />
+    <Text Include="..\Assets\BrazosConPistola.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\Assets\CangrejoMalo.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\Assets\Medicina.obj">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Include="..\Assets\Pistola.obj">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="P3_ProgramacionAvanzada.rc" />

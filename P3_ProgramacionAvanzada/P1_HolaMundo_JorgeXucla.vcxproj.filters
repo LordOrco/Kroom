@@ -118,22 +118,22 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\Assets\Pistola.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-    <Object Include="..\Assets\Medicina.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-    <Object Include="..\Assets\CangrejoMalo.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-    <Object Include="..\Assets\BrazosConPistola.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="P3_ProgramacionAvanzada.rc">
       <Filter>Archivos de recursos</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Assets\BrazosConPistola.obj">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="..\Assets\CangrejoMalo.obj">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="..\Assets\Medicina.obj">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="..\Assets\Pistola.obj">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
   </ItemGroup>
 </Project>
