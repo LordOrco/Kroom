@@ -17,6 +17,12 @@ public:
 		slacks(20) 
 	{}
 
+	Sphere(float radiusToSet, float slicesToSet, float slackToSet):
+		radius(radiusToSet),
+		slices(slicesToSet),
+		slacks(slackToSet)
+	{}
+
 	inline float GetRadius() const { return this->radius; }
 	inline float GetSlices() const { return this->slices; }
 	inline float GetSlacks() const { return this->slacks; }

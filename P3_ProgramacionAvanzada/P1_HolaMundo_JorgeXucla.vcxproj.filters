@@ -13,127 +13,196 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de recursos\Obj en escena">
+      <UniqueIdentifier>{af6a92ef-b9c0-4536-b04b-8f2e9f2b3712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\Otros">
+      <UniqueIdentifier>{3698d7ae-baa7-4ee1-a338-78dd8b487084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Objetos sencillos">
+      <UniqueIdentifier>{3001b31e-a932-49ef-9b26-0053245e4e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Objetos sencillos">
+      <UniqueIdentifier>{2482f8f8-365c-49d6-85b5-031aeebf3d42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Clases padre">
+      <UniqueIdentifier>{e3bf9572-908e-439f-9222-063b5c2f011e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Para cargar obj">
+      <UniqueIdentifier>{de43eb53-db3d-4521-953a-41fe01cdfc76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Escenario">
+      <UniqueIdentifier>{e13b43e0-55eb-47bb-b204-719f39ddef1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Clases padre">
+      <UniqueIdentifier>{8e08a7a2-ae48-4918-868e-45090ae073e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Escenario">
+      <UniqueIdentifier>{7fbbc2af-4c87-43bc-8361-dc9ff36f8c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Para cargar obj">
+      <UniqueIdentifier>{ef033f4e-1fe7-4724-be17-6b064d5c5dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Objetos recogibles">
+      <UniqueIdentifier>{336a77a9-91ed-4954-b19d-b6c74caaacd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Objetos recogibles">
+      <UniqueIdentifier>{31d26656-fd54-4599-bd96-f3c005c08b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Arma">
+      <UniqueIdentifier>{5e245025-1d96-4130-9e24-90f4da4fc1ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Arma">
+      <UniqueIdentifier>{611b9b77-7d11-4e95-b7f9-68d56f2d0de1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="P3_ProgramacionAvanzada.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Teapot.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Cilindro.cpp">
+      <Filter>Archivos de origen\Objetos sencillos</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3D.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Solid.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Toroide.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Objetos sencillos</Filter>
     </ClCompile>
     <ClCompile Include="Prisma.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Objetos sencillos</Filter>
     </ClCompile>
-    <ClCompile Include="Cilindro.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Archivos de origen\Objetos sencillos</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Teapot.cpp">
+      <Filter>Archivos de origen\Objetos sencillos</Filter>
+    </ClCompile>
+    <ClCompile Include="Toroide.cpp">
+      <Filter>Archivos de origen\Objetos sencillos</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Archivos de origen\Clases padre</Filter>
+    </ClCompile>
+    <ClCompile Include="Solid.cpp">
+      <Filter>Archivos de origen\Clases padre</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>Archivos de origen\Clases padre</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Escenario</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Archivos de origen\Escenario</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Archivos de origen\Escenario</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Para cargar obj</Filter>
     </ClCompile>
     <ClCompile Include="ModelLoader.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Para cargar obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Archivos de origen\Para cargar obj</Filter>
+    </ClCompile>
+    <ClCompile Include="Municion.cpp">
+      <Filter>Archivos de origen\Objetos recogibles</Filter>
+    </ClCompile>
+    <ClCompile Include="Medicina.cpp">
+      <Filter>Archivos de origen\Objetos recogibles</Filter>
+    </ClCompile>
+    <ClCompile Include="Arma.cpp">
+      <Filter>Archivos de origen\Arma</Filter>
+    </ClCompile>
+    <ClCompile Include="Bala.cpp">
+      <Filter>Archivos de origen\Arma</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="ClassDiagram.cd">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Teapot.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Solid.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Toroide.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Prisma.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Cilindro.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelLoader.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Cilindro.h">
+      <Filter>Archivos de encabezado\Objetos sencillos</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Archivos de encabezado\Objetos sencillos</Filter>
+    </ClInclude>
+    <ClInclude Include="Prisma.h">
+      <Filter>Archivos de encabezado\Objetos sencillos</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Archivos de encabezado\Objetos sencillos</Filter>
+    </ClInclude>
+    <ClInclude Include="Toroide.h">
+      <Filter>Archivos de encabezado\Objetos sencillos</Filter>
+    </ClInclude>
+    <ClInclude Include="Teapot.h">
+      <Filter>Archivos de encabezado\Objetos sencillos</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Archivos de encabezado\Clases padre</Filter>
+    </ClInclude>
+    <ClInclude Include="Solid.h">
+      <Filter>Archivos de encabezado\Clases padre</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>Archivos de encabezado\Clases padre</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Archivos de encabezado\Para cargar obj</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Archivos de encabezado\Para cargar obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Archivos de encabezado\Para cargar obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Archivos de encabezado\Escenario</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Archivos de encabezado\Escenario</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Archivos de encabezado\Escenario</Filter>
+    </ClInclude>
+    <ClInclude Include="Municion.h">
+      <Filter>Archivos de encabezado\Objetos recogibles</Filter>
+    </ClInclude>
+    <ClInclude Include="Medicina.h">
+      <Filter>Archivos de encabezado\Objetos recogibles</Filter>
+    </ClInclude>
+    <ClInclude Include="Arma.h">
+      <Filter>Archivos de encabezado\Arma</Filter>
+    </ClInclude>
+    <ClInclude Include="Bala.h">
+      <Filter>Archivos de encabezado\Arma</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\Assets\Pistola.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-    <Object Include="..\Assets\Medicina.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-    <Object Include="..\Assets\CangrejoMalo.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
-    <Object Include="..\Assets\BrazosConPistola.obj">
-      <Filter>Archivos de recursos</Filter>
-    </Object>
+    <Text Include="..\Assets\BrazosConPistola.obj">
+      <Filter>Archivos de recursos\Obj en escena</Filter>
+    </Text>
+    <Text Include="..\Assets\CangrejoMalo.obj">
+      <Filter>Archivos de recursos\Obj en escena</Filter>
+    </Text>
+    <Text Include="..\Assets\Medicina.obj">
+      <Filter>Archivos de recursos\Obj en escena</Filter>
+    </Text>
+    <Text Include="..\Assets\Pistola.obj">
+      <Filter>Archivos de recursos\Otros</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="P3_ProgramacionAvanzada.rc">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de recursos\Otros</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>
