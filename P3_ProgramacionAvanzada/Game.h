@@ -8,8 +8,10 @@
 #include "Toroide.h"
 #include "Cilindro.h"
 #include "Scene.h"
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 class Game
 {
@@ -22,14 +24,25 @@ private:
 	Scene juego;
 	Scene resultados;
 
+	//control fps
+	const double TIME_INCREMENT = 1.0 / 30.0; //tiempo juego
+	const long UPDATE_PERIOD = 1000 / 30.0; //tiempo real
+	
+	milliseconds initialMiliseconds;
+	long lastUpdatedTime;
+
 public:
 
-	Game():
-		escenaActual(0),
+	Game() :
+		escenaActual(1),
 		escenaPruebas(0),
 		menuPrincipal(1),
 		juego(2),
-		resultados(3)
+		resultados(3),
+
+		initialMiliseconds(duration_cast<milliseconds>(system_clock::now().time_since_epoch())),
+		lastUpdatedTime(0)
+
 	{
 		escenas.push_back(escenaPruebas);
 		escenas.push_back(menuPrincipal);

@@ -112,6 +112,6 @@ public:
 
 	//MÉTODOS
 	virtual void Render() = 0;
-	virtual void Update();
+	virtual void Update(const float& time);
 };
 

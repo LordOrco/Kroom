@@ -44,7 +44,7 @@ public:
 
 	void Init();
 	void Render();
-	void Update();
+	void Update(const float& time);
 	void Clear();
 
 	void ProcessKeyPressed(unsigned char key, int px, int py);
