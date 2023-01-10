@@ -46,6 +46,14 @@ public:
 		color()
 	{}
 
+	Solid(Vector3D positionArgument, Vector3D orientationArgument, Color colorArgument) :
+		coordinates(positionArgument),
+		orientation(orientationArgument),
+		speed(0),
+		orientationSpeed(0),
+		color(colorArgument)
+	{}
+
 
 	//GETTERS
 	inline Vector3D GetCoordinates() const { return this->coordinates; }

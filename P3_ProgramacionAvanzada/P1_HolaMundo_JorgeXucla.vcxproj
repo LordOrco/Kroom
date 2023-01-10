@@ -128,13 +128,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arma.cpp" />
+    <ClCompile Include="Bala.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cilindro.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Medicina.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
+    <ClCompile Include="Municion.cpp" />
     <ClCompile Include="P3_ProgramacionAvanzada.cpp" />
     <ClCompile Include="Prisma.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -146,16 +150,21 @@
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arma.h" />
+    <ClInclude Include="Bala.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cilindro.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Medicina.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
+    <ClInclude Include="Municion.h" />
     <ClInclude Include="Prisma.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
