@@ -14,15 +14,35 @@ using namespace std;
 class Game
 {
 private:
-	Scene escena;
+	vector <Scene> escenas;
+	int escenaActual;
+
+	Scene escenaPruebas;
+	Scene menuPrincipal;
+	Scene juego;
+	Scene resultados;
 
 public:
 
-	Game() {}
+	Game():
+		escenaActual(0),
+		escenaPruebas(0),
+		menuPrincipal(1),
+		juego(2),
+		resultados(3)
+	{
+		escenas.push_back(escenaPruebas);
+		escenas.push_back(menuPrincipal);
+		escenas.push_back(juego);
+		escenas.push_back(resultados);
+	}
 
 	~Game(){ }
 
-	inline Scene GetScene() const { return this->escena; }
+	inline Scene GetScene() const { return this->escenas[escenaActual]; }
+	inline int GetEscenaActual() { return this->escenaActual; }
+
+	inline void SetEscenaActual(int escenaToSet) { this->escenaActual = escenaToSet; }
 
 	void Init();
 	void Render();

@@ -14,21 +14,28 @@ class Scene
 private:
 	vector <Solid*> gameObjects;
 	Vector3D boundary;
+	Camera camera;
+	int tipo;
 	void checkBoundary(Solid* object);
 
 public:
-	Scene():
-		boundary(8, 6, 4)
+	Scene(int type) :
+		tipo(type),
+		camera(Vector3D(0, 0, 0)),
+		boundary(10, 5, 10)
 	{}
 
 	inline vector <Solid*> GetGameObjects() { return this->gameObjects; }
 	inline Solid* GetGameObject(int index) { return this->gameObjects[index]; }
-	inline void SetGameObject(int index, Solid* solidToSet) { this->gameObjects[index] = solidToSet; }
 	inline Vector3D GetBoundary() const { return this->boundary; }
+	inline void SetGameObject(int index, Solid* solidToSet) { this->gameObjects[index] = solidToSet; }
+	inline void AddGameObject(Solid* solidToAdd) { this->gameObjects.push_back(solidToAdd); }
 
 	inline float GetBoundaryX() const { return this->boundary.GetX(); }
 	inline float GetBoundaryY() const { return this->boundary.GetY(); }
 	inline float GetBoundaryZ() const { return this->boundary.GetZ(); }
+	inline int GetTipo() const { return this->tipo; }
+	inline Camera GetCamera() { return this->camera; }
 
 	inline void SetBoundary(const Vector3D& boundaryToSet) { this->boundary = boundaryToSet; }
 	inline void SetBoundaryX(const float& boundaryXToSet) { this->boundary.SetX(boundaryXToSet); }

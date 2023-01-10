@@ -11,7 +11,7 @@ const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 const int WINDOW_POSITION_X = 0;
 const int WINDOW_POSITION_Y = 0;
-const char TITLE[] = "DOOM";
+const char TITLE[] = "Crabs vs You";
 
 const GLclampf RED = 0.5;
 const GLclampf GREEN = 0.5;
@@ -48,10 +48,6 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
-    gluLookAt(4.0f, 3.0f, 12.0f,
-        4.0f, 3.0f, 0.0f,
-        0.0f, 1.0f, 0.0f);
 
     game.Render();
 
@@ -121,7 +117,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);                                           //Tratamiento del evento de repintado de la ventana
     glutKeyboardFunc(keyPressed);                                       //Tratamiento del evento de tecla pulsada
     glutSpecialFunc(specialKey);                                        //Tratamiendo del evento de tecla especial pulsada
-    glutMotionFunc(mouseMoved);                                         //Tratamiento del evento de mover el ratón
+    glutPassiveMotionFunc(mouseMoved);                                         //Tratamiento del evento de mover el ratón
     glutMouseFunc(mouseClicked);                                        //Tratamiento del evento de click del ratón
     glutIdleFunc(idle);                                              //Cuando no hay eventos
     
