@@ -139,6 +139,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Municion.cpp" />
+    <ClCompile Include="ObjetoRenderizable.cpp" />
     <ClCompile Include="P3_ProgramacionAvanzada.cpp" />
     <ClCompile Include="Prisma.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Municion.h" />
+    <ClInclude Include="ObjetoRenderizable.h" />
     <ClInclude Include="Prisma.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />

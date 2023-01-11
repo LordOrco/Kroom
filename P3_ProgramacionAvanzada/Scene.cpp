@@ -138,6 +138,36 @@ void Scene::Init() {
 
 		this->gameObjects.push_back(escenarioT);
 
+
+		//CARGA OBJETO MEDICINA
+		Model* cajaMedicina = new Model();
+		Medicina* medicina = new Medicina();
+
+		loader->LoadModel("..\\Assets\\Medicina.obj");
+		*cajaMedicina = loader->GetModel();
+
+		medicina->SetObjetoRenderizable(*cajaMedicina);
+		loader->Clear();
+
+		cajaMedicina->SetCoordinateX(0);
+		cajaMedicina->SetCoordinateY(0);
+		cajaMedicina->SetCoordinateZ(-5);
+
+		this->gameObjects.push_back(cajaMedicina);
+
+		//CARGA OBJETO MUNICION
+		Sphere* municion = new Sphere();
+		Bala* balasRecogibles = new Bala();
+
+		balasRecogibles->SetBalaRenderizable(*municion);
+
+		municion->SetCoordinateX(0);
+		municion->SetCoordinateY(0);
+		municion->SetCoordinateZ(-10);
+
+		this->gameObjects.push_back(municion);
+
+
 		break;
 	}
 

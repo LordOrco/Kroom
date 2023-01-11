@@ -1,9 +1,7 @@
 #pragma once
-#include "Solid.h"
-#include "Arma.h"
-#include "Sphere.h"
+#include "ObjetoRenderizable.h"
 
-class Bala: public Solid, public Arma, public Sphere
+class Bala: public ObjetoRenderizable
 {
 private:
 
@@ -12,9 +10,6 @@ private:
 public:
 
 	Bala():
-		Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0), Vector3D(0)),
-		Sphere(float(0.0), float(0.0), float(0.0)),
-		Arma(string("nombre")),
 		daño(0)
 	{}
 

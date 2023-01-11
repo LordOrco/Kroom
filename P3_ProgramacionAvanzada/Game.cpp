@@ -50,6 +50,7 @@ void Game::Update() {
 	milliseconds currentTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
 	if ((currentTime.count() - this->initialMiliseconds.count()) - this->lastUpdatedTime > UPDATE_PERIOD) {
+
 		this->escenas[escenaActual].Update(TIME_INCREMENT);
 		this->lastUpdatedTime = currentTime.count() - this->initialMiliseconds.count();
 	}

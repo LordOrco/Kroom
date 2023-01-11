@@ -1,7 +1,7 @@
 #pragma once
-#include "Solid.h"
+#include "ObjetoRenderizable.h"
 
-class Medicina: public Solid
+class Medicina: public ObjetoRenderizable
 {
 private:
 
@@ -10,8 +10,7 @@ private:
 public:
 
 	Medicina():
-		Solid(Vector3D(), Vector3D(), Color()),
-		vida_añadida((int)rand() % 10) //asumimos que el máximo de vida del personaje es 10
+		vida_añadida((int)rand() % 10)
 	{}
 
 	inline int GetVida() const { return this->vida_añadida; }

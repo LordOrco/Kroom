@@ -8,6 +8,8 @@
 #include "Toroide.h"
 #include "Cilindro.h"
 #include "ModelLoader.h"
+#include "Medicina.h"
+#include "Bala.h"
 
 class Scene
 {
