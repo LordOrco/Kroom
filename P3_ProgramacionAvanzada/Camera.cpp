@@ -4,7 +4,6 @@ void Camera::Render() {
     glRotatef(this->GetRotX(), 1.0, 0.0, 0.0);
     glRotatef(this->GetRotY(), 0.0, 1.0, 0.0);
     glTranslatef(-this->GetCoordinateX(), -this->GetCoordinateY(), -this->GetCoordinateZ());
-
 }
 
 void Camera::move(unsigned char key) {
@@ -27,13 +26,16 @@ void Camera::move(unsigned char key) {
         this->SetCoordinateZ(this->GetCoordinateZ() + float(sin(this->GetRotY() * 3.141592654f / 180)) * 0.15);
         break;
     }
+
+    cout << "Movimiento Camara" << endl;
+
 }
 
 void Camera::target(int x, int y) {
-    int diffx = x - lastx;
-    int diffy = y - lasty;
-    lastx = x; 
-    lasty = y; 
+
+    int diffx = x - 400;
+    int diffy = y - 300;
+
     if (this->GetRotX() >= 45) {
         this->SetRotX(45);
     }
@@ -47,8 +49,12 @@ void Camera::target(int x, int y) {
     else if (this->GetRotY() < 0) {
         this->SetRotY(360);
     }
-    this->SetRotX(this->GetRotX() + (float)diffy);
-    this->SetRotY(this->GetRotY() + (float)diffx);
+    this->SetRotX(this->GetRotX() + (float)diffy * 0.3);
+    this->SetRotY(this->GetRotY() + (float)diffx * 0.3);
+
+    glutWarpPointer(400, 300);
+
+    cout << "Apuntar Camara" << endl;
 }
 
 void Camera::placeInMenu() {

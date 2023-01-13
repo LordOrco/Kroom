@@ -10,5 +10,6 @@ void Personaje::Update(const float& time) {
 	this->SetCoordinateY(0.6);
 	this->SetCoordinateZ(this->camara->GetCoordinateZ());
 
+	cout << "personaje Update" << endl;
 }
 

@@ -3,7 +3,7 @@
 using namespace std;
 
 void Game::ProcessKeyPressed(unsigned char key, int px, int py) {
-	cout << "Tecla pulsada " << key << endl;
+	//cout << "Tecla pulsada " << key << endl;
 	switch (escenaActual) {
 	case 0:
 		escenaActual++;
@@ -21,20 +21,24 @@ void Game::ProcessKeyPressed(unsigned char key, int px, int py) {
 
 	case 2:
 		this->camera.move(key);
-
+		personaje.Update(TIME_INCREMENT);
+		if (key == 'x') {
+			SetEscenaActual(1);
+		}
 		break;
 	}
 }
 
 void Game::ProcessMouseMovement(int x, int y) {
-	cout << "Movimiento del raton " <<	x << ", " << y << endl;
+	//cout << "Movimiento del raton " <<	x << ", " << y << endl;
 	if (GetEscenaActual() == 2) {
 		this->camera.target(x, y);
+		personaje.Update(TIME_INCREMENT);
 	}
 }
 
 void Game::ProcessMouseClick(int button, int state, int x, int y) {
-	cout << "Click:  " << button << endl;
+	//cout << "Click:  " << button << endl;
 	if (GetEscenaActual() == 2) {
 		shoot();
 	}
@@ -119,6 +123,7 @@ void Game::Init() {
 void Game::Render() {
 	this->camera.Render();
 	this->escenas[escenaActual].Render();
+	cout << "RENDER" << endl;
 }
 
 void Game::Update() {
@@ -136,7 +141,7 @@ void Game::shoot() {
 	bala->SetCoordinates(Vector3D(personaje.GetCoordinateX() - 0.025f - float(sin(personaje.GetRotY() * 3.141592654f / 180)), -0.1, 
 								  personaje.GetCoordinateZ() - float(cos(personaje.GetRotY() * 3.141592654f / 180))
 						));
-	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180)));
-	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180)));
+	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180))*10);
+	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180))*10);
 	escenas[2].AddGameObject(bala);
 }
