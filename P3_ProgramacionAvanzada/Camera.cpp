@@ -1,7 +1,6 @@
 #include "Camera.h"
 
 void Camera::Render() {
-
     glRotatef(this->GetRotX(), 1.0, 0.0, 0.0);
     glRotatef(this->GetRotY(), 0.0, 1.0, 0.0);
     glTranslatef(-this->GetCoordinateX(), -this->GetCoordinateY(), -this->GetCoordinateZ());
@@ -35,11 +34,11 @@ void Camera::target(int x, int y) {
     int diffy = y - lasty;
     lastx = x; 
     lasty = y; 
-    if (this->GetRotX() >= 360) {
-        this->SetRotX(0);
+    if (this->GetRotX() >= 45) {
+        this->SetRotX(45);
     }
-    else if (this->GetRotX() < 0) {
-        this->SetRotX(360);
+    else if (this->GetRotX() < -45) {
+        this->SetRotX(-45);
     }
 
     if (this->GetRotY() >= 360) {
@@ -50,4 +49,14 @@ void Camera::target(int x, int y) {
     }
     this->SetRotX(this->GetRotX() + (float)diffy);
     this->SetRotY(this->GetRotY() + (float)diffx);
+}
+
+void Camera::placeInMenu() {
+    this->SetCoordinates(Vector3D(0, 0, 0));
+    this->SetOrientation(Vector3D(0, 0, 0));
+}
+
+void Camera::placeInPlayGround() {
+    this->SetCoordinates(Vector3D(5, 20, 30));
+    this->SetOrientation(Vector3D(45, 0, 0));
 }

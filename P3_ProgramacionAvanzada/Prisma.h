@@ -10,10 +10,10 @@ private:
 
 public:
 	Prisma() :
-		Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0) / 100, Vector3D(0) / 10),
-		length(((float)rand() / (RAND_MAX))),
-		height(((float)rand() / (RAND_MAX))),
-		depth(((float)rand() / (RAND_MAX)))
+		Solid(Vector3D(), Vector3D(), Color(255, 0, 0), Vector3D(), Vector3D()),
+		length(1),
+		height(0.1),
+		depth(0.1)
 	{}
 
 	inline float GetLength() const { return this->length; }

@@ -128,7 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Arma.cpp" />
+    <ClCompile Include="Personaje.cpp" />
     <ClCompile Include="Bala.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cilindro.cpp" />
@@ -146,6 +146,7 @@
     <ClCompile Include="Solid.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Teapot.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Toroide.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -155,7 +156,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arma.h" />
+    <ClInclude Include="Personaje.h" />
     <ClInclude Include="Bala.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cilindro.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Solid.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Teapot.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Toroide.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector3D.h" />

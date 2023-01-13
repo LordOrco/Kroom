@@ -12,6 +12,16 @@ private:
 
 public:
 
+	ObjetoRenderizable(Sphere balaToSet) :
+		Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0), Vector3D(0)),
+		bala(balaToSet)
+	{}
+
+	ObjetoRenderizable(Model modeloToSet) :
+		Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0), Vector3D(0)),
+		renderizable(modeloToSet)
+	{}
+
 	inline Model GetObjetoRenderizable() const { return this->renderizable; }
 	inline Sphere GetBalaRenderizable() const { return this->bala; }
 

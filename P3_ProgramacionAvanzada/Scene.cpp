@@ -1,21 +1,5 @@
 #include "Scene.h"
 
-void Scene::ProcessKeyPressed(unsigned char key, int px, int py) {
-	cout << "Tecla pulsada " << key << endl;
-	this->camera.move(key);
-}
-
-void Scene::ProcessMouseMovement(int x, int y) {
-	cout << "Movimiento del raton " << x << ", " << y << endl;
-	if (this->tipo == 2) {
-		this->camera.target(x, y);
-	}
-}
-
-void Scene::ProcessMouseClick(int button, int state, int x, int y) {
-	cout << "Click:  " << button << endl;
-}
-
 void Scene::Init() {
 	ModelLoader* loader = new ModelLoader();
 
@@ -23,9 +7,6 @@ void Scene::Init() {
 	//ZONA PRUEBAS
 	case 0:
 	{
-		this->camera.SetCoordinates(Vector3D(5, 20, 30));
-		this->camera.SetOrientation(Vector3D(45, 0, 0));
-
 		Model* cajaMedicina = new Model();
 		Model* brazosPistola = new Model();
 		Model* cangrejoMalo = new Model();
@@ -105,68 +86,38 @@ void Scene::Init() {
 	case 1: {
 		Teapot* teapot = new Teapot();
 		this->gameObjects.push_back(teapot);
-
-		this->camera.SetCoordinates(Vector3D(0,0,0));
-		this->camera.SetOrientation(Vector3D(0,0,0));
-
 		break;
 	}
 
 	//ESCENA DE JUEGO
 	case 2: {
-		Model* escenarioT = new Model();
+		////CARGA OBJETO MEDICINA
+		//Model* cajaMedicina = new Model();
+		//Medicina* medicina = new Medicina();
 
-		loader->LoadModel("..\\Assets\\EscenarioT.obj");
-		*escenarioT = loader->GetModel();
-		loader->Clear();
+		//loader->LoadModel("..\\Assets\\Medicina.obj");
+		//*cajaMedicina = loader->GetModel();
 
-		escenarioT->SetCoordinateX(0);
-		escenarioT->SetCoordinateY(-1);
-		escenarioT->SetCoordinateZ(0);
+		//medicina->SetObjetoRenderizable(*cajaMedicina);
+		//loader->Clear();
 
-		escenarioT->SetSpeedX(0);
-		escenarioT->SetSpeedY(0);
-		escenarioT->SetSpeedZ(0);
+		//cajaMedicina->SetCoordinateX(0);
+		//cajaMedicina->SetCoordinateY(0);
+		//cajaMedicina->SetCoordinateZ(-5);
 
-		escenarioT->SetRotSpeedX(0);
-		escenarioT->SetRotSpeedY(0);
-		escenarioT->SetRotSpeedZ(0);
+		//this->gameObjects.push_back(cajaMedicina);
 
-		escenarioT->SetRotX(0);
-		escenarioT->SetRotY(0);
-		escenarioT->SetRotZ(0);
+		////CARGA OBJETO MUNICION
+		//Sphere* municion = new Sphere();
+		//Bala* balasRecogibles = new Bala();
 
-		this->gameObjects.push_back(escenarioT);
+		//balasRecogibles->SetBalaRenderizable(*municion);
 
+		//municion->SetCoordinateX(0);
+		//municion->SetCoordinateY(0);
+		//municion->SetCoordinateZ(-10);
 
-		//CARGA OBJETO MEDICINA
-		Model* cajaMedicina = new Model();
-		Medicina* medicina = new Medicina();
-
-		loader->LoadModel("..\\Assets\\Medicina.obj");
-		*cajaMedicina = loader->GetModel();
-
-		medicina->SetObjetoRenderizable(*cajaMedicina);
-		loader->Clear();
-
-		cajaMedicina->SetCoordinateX(0);
-		cajaMedicina->SetCoordinateY(0);
-		cajaMedicina->SetCoordinateZ(-5);
-
-		this->gameObjects.push_back(cajaMedicina);
-
-		//CARGA OBJETO MUNICION
-		Sphere* municion = new Sphere();
-		Bala* balasRecogibles = new Bala();
-
-		balasRecogibles->SetBalaRenderizable(*municion);
-
-		municion->SetCoordinateX(0);
-		municion->SetCoordinateY(0);
-		municion->SetCoordinateZ(-10);
-
-		this->gameObjects.push_back(municion);
-
+		//this->gameObjects.push_back(municion);
 
 		break;
 	}
@@ -181,7 +132,6 @@ void Scene::Init() {
 }
 
 void Scene::Render() {
-	camera.Render();
 	for (int i = 0; i < gameObjects.size(); i++) {
 		gameObjects[i]->Render();
 	}

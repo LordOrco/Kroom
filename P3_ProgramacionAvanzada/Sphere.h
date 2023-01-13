@@ -11,8 +11,8 @@ private:
 
 public:
 	Sphere():
-		Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0) / 100, Vector3D(0) / 10),
-		radius(((float)rand() / (RAND_MAX))),
+		Solid(Vector3D(), Vector3D(), Color(0, 0, 1), Vector3D(), Vector3D()),
+		radius(0.025),
 		slices(20),
 		slacks(20) 
 	{}

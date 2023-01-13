@@ -1,13 +1,10 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "Teapot.h"
 #include "Cube.h"
 #include "Sphere.h"
-#include "Prisma.h"
-#include "Toroide.h"
-#include "Cilindro.h"
 #include "Scene.h"
+#include "Personaje.h"
 #include <chrono>
 
 using namespace std;
@@ -18,6 +15,11 @@ class Game
 private:
 	vector <Scene> escenas;
 	int escenaActual;
+
+	Camera camera;
+	Personaje personaje;
+
+	vector <Solid*> renderizables;
 
 	Scene escenaPruebas;
 	Scene menuPrincipal;
@@ -34,8 +36,10 @@ private:
 public:
 
 	Game() :
-		escenaActual(1),
+		escenaActual(2),
 		escenaPruebas(0),
+		camera(Vector3D(0, 0, 0)),
+		personaje(&camera),
 		menuPrincipal(1),
 		juego(2),
 		resultados(3),
@@ -53,6 +57,7 @@ public:
 	~Game(){ }
 
 	inline Scene GetScene() const { return this->escenas[escenaActual]; }
+	inline Camera GetCamera() { return this->camera; }
 	inline int GetEscenaActual() { return this->escenaActual; }
 
 	inline void SetEscenaActual(int escenaToSet) { this->escenaActual = escenaToSet; }
@@ -63,6 +68,8 @@ public:
 	void ProcessKeyPressed(unsigned char key, int px, int py);
 	void ProcessMouseMovement(int x, int y);
 	void ProcessMouseClick(int button, int state, int x, int y);
+
+	void shoot();
 
 };
 

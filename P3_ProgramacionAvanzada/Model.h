@@ -9,9 +9,13 @@ private:
 
 public:
 
-	Model(): Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0) / 100, Vector3D(0) / 10) {};
+	Model(): Solid(Vector3D(), Vector3D(), Color(), Vector3D(), Vector3D()) {};
 
 	void AddTriangle(Triangle triangleToAdd);
+	inline vector<Triangle> GetTriangles() { return this->triangulos; };
+	inline void SetTriangles(vector<Triangle> trianglesToSet) {this->triangulos = trianglesToSet; };
+
+
 	void PaintColor(Color colorToSet);
 	void Clear();
 

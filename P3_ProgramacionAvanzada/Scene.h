@@ -10,20 +10,19 @@
 #include "ModelLoader.h"
 #include "Medicina.h"
 #include "Bala.h"
+#include "Personaje.h"
 
 class Scene
 {
 private:
 	vector <Solid*> gameObjects;
 	Vector3D boundary;
-	Camera camera;
 	int tipo;
 	void checkBoundary(Solid* object);
 
 public:
 	Scene(int type) :
 		tipo(type),
-		camera(Vector3D(0, 0, 0)),
 		boundary(10, 5, 10)
 	{}
 
@@ -37,7 +36,6 @@ public:
 	inline float GetBoundaryY() const { return this->boundary.GetY(); }
 	inline float GetBoundaryZ() const { return this->boundary.GetZ(); }
 	inline int GetTipo() const { return this->tipo; }
-	inline Camera GetCamera() { return this->camera; }
 
 	inline void SetBoundary(const Vector3D& boundaryToSet) { this->boundary = boundaryToSet; }
 	inline void SetBoundaryX(const float& boundaryXToSet) { this->boundary.SetX(boundaryXToSet); }

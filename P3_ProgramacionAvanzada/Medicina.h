@@ -1,7 +1,7 @@
 #pragma once
 #include "ObjetoRenderizable.h"
 
-class Medicina: public ObjetoRenderizable
+class Medicina
 {
 private:
 

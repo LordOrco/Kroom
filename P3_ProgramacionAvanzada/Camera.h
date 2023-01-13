@@ -1,6 +1,8 @@
 #pragma once
 #include "GL/freeglut.h"
 #include "Solid.h"
+#include "Text.h"
+#include "Prisma.h"
 
 class Camera : public Solid
 {
@@ -18,7 +20,11 @@ public:
 	}
 
 	void Render();
+
 	void move(unsigned char key);
 	void target(int x, int y);
+
+	void placeInPlayGround();
+	void placeInMenu();
 };
 

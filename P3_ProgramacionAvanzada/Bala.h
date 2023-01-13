@@ -1,7 +1,7 @@
 #pragma once
 #include "ObjetoRenderizable.h"
 
-class Bala: public ObjetoRenderizable
+class Bala
 {
 private:
 
