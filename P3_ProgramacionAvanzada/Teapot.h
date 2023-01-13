@@ -9,7 +9,7 @@ private:
 
 public: 
 	Teapot(): 
-		Solid(Vector3D(0), Vector3D(0), Color(), Vector3D(0)/100, Vector3D(0)/10),
+		Solid(Vector3D(), Vector3D(), Color(), Vector3D(), Vector3D()),
 		size(((float)rand() / (RAND_MAX)))
 	{}
 

@@ -74,6 +74,11 @@ void keyPressed(unsigned char key, int px, int py) {
     glutPostRedisplay();
 }
 
+void keyUp(unsigned char key, int px, int py) {
+    game.ProcessKeyUp(key, px, py);
+    glutPostRedisplay();
+}
+
 void mouseMoved(int x, int y) {
     game.ProcessMouseMovement(x, y);
     glutPostRedisplay();
@@ -116,10 +121,11 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);                                           //Tratamiento del evento de redimensionado de la ventana
     glutDisplayFunc(display);                                           //Tratamiento del evento de repintado de la ventana
     glutKeyboardFunc(keyPressed);                                       //Tratamiento del evento de tecla pulsada
+    glutKeyboardUpFunc(keyUp);                                              //Tratamiento del event de levantar tecla
     glutSpecialFunc(specialKey);                                        //Tratamiendo del evento de tecla especial pulsada
-    glutPassiveMotionFunc(mouseMoved);                                         //Tratamiento del evento de mover el ratón
+    glutPassiveMotionFunc(mouseMoved);                                  //Tratamiento del evento de mover el ratón
     glutMouseFunc(mouseClicked);                                        //Tratamiento del evento de click del ratón
-    glutIdleFunc(idle);                                              //Cuando no hay eventos
+    glutIdleFunc(idle);                                                 //Cuando no hay eventos
     
     writeLine("Iniciando gráficos");
     initGraphics();                                                     //Iniciamos OpenGL

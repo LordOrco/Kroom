@@ -5,6 +5,7 @@
 #include "Sphere.h"
 #include "Scene.h"
 #include "Personaje.h"
+#include "Enemigo.h"
 #include <chrono>
 
 using namespace std;
@@ -13,13 +14,21 @@ using namespace std::chrono;
 class Game
 {
 private:
-	vector <Scene> escenas;
-	int escenaActual;
+	//Control de movimiento
+	bool wPressed;
+	bool aPressed;
+	bool sPressed;
+	bool dPressed;
+
 
 	Camera camera;
 	Personaje personaje;
+	vector <Model*> renderizables;
 
-	vector <Solid*> renderizables;
+	//Control de escenas
+	vector <Scene> escenas;
+
+	int escenaActual;
 
 	Scene escenaPruebas;
 	Scene menuPrincipal;
@@ -45,7 +54,12 @@ public:
 		resultados(3),
 
 		initialMiliseconds(duration_cast<milliseconds>(system_clock::now().time_since_epoch())),
-		lastUpdatedTime(0)
+		lastUpdatedTime(0),
+
+		wPressed(false),
+		aPressed(false),
+		sPressed(false),
+		dPressed(false)
 
 	{
 		escenas.push_back(escenaPruebas);
@@ -66,10 +80,13 @@ public:
 	void Render();
 	void Update();
 	void ProcessKeyPressed(unsigned char key, int px, int py);
+	void ProcessKeyUp(unsigned char key, int px, int py);
 	void ProcessMouseMovement(int x, int y);
 	void ProcessMouseClick(int button, int state, int x, int y);
 
 	void shoot();
+	void spawnEnemy();
+	void movimientoJugador();
 
 };
 

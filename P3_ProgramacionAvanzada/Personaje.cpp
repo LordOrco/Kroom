@@ -2,7 +2,7 @@
 
 void Personaje::Update(const float& time) {
 
-	//this->SetRotX(this->camara->GetRotX());
+	this->SetRotX(-this->camara->GetRotX());
 	this->SetRotY(-this->camara->GetRotY());
 	//this->SetRotZ(this->camara->GetRotZ());
 	

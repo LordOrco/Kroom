@@ -20,12 +20,53 @@ void Game::ProcessKeyPressed(unsigned char key, int px, int py) {
 		break;
 
 	case 2:
-		this->camera.move(key);
-		personaje.Update(TIME_INCREMENT);
-		if (key == 'x') {
+		switch (key) {
+		case 'w':
+			wPressed = true;
+			break;
+		case 'a':
+			aPressed = true;
+			break;
+		case 's':
+			sPressed = true;
+			break;
+		case 'd':
+			dPressed = true;
+			break;
+		case 'x':
 			SetEscenaActual(1);
+			break;
 		}
 		break;
+	}
+}
+
+void Game::ProcessKeyUp(unsigned char key, int px, int py) {
+	//cout << "Tecla pulsada " << key << endl;
+	if(escenaActual == 2){
+		switch (key) {
+		case 'w':
+			wPressed = false;
+			break;
+		case 'a':
+			aPressed = false;
+			break;
+		case 's':
+			sPressed = false;
+			break;
+		case 'd':
+			dPressed = false;
+			break;
+		default:
+			break;
+		}
+	}
+	else {
+		this->camera.placeInMenu();
+		wPressed = false;
+		aPressed = false;
+		sPressed = false;
+		dPressed = false;
 	}
 }
 
@@ -39,7 +80,7 @@ void Game::ProcessMouseMovement(int x, int y) {
 
 void Game::ProcessMouseClick(int button, int state, int x, int y) {
 	//cout << "Click:  " << button << endl;
-	if (GetEscenaActual() == 2) {
+	if (GetEscenaActual() == 2 && button == 0 && state == 0) {
 		shoot();
 	}
 }
@@ -106,7 +147,6 @@ void Game::Init() {
 	renderizables.push_back(&personaje);
 	renderizables.push_back(cangrejoMalo);
 	renderizables.push_back(escenarioT);
-	renderizables.push_back(bala);
 
 	//Añadir modelos a escenas
 	escenas[2].AddGameObject(&personaje);
@@ -118,6 +158,8 @@ void Game::Init() {
 	for (int i = 0; i < escenas.size(); i++) {
 		this->escenas[i].Init();
 	}
+
+	spawnEnemy();
 }
 
 void Game::Render() {
@@ -131,6 +173,7 @@ void Game::Update() {
 
 	if ((currentTime.count() - this->initialMiliseconds.count()) - this->lastUpdatedTime > UPDATE_PERIOD) {
 
+		movimientoJugador();
 		this->escenas[escenaActual].Update(TIME_INCREMENT);
 		this->lastUpdatedTime = currentTime.count() - this->initialMiliseconds.count();
 	}
@@ -138,10 +181,33 @@ void Game::Update() {
 
 void Game::shoot() {
 	Sphere* bala = new Sphere();
-	bala->SetCoordinates(Vector3D(personaje.GetCoordinateX() - 0.025f - float(sin(personaje.GetRotY() * 3.141592654f / 180)), -0.1, 
+	bala->SetCoordinates(Vector3D(personaje.GetCoordinateX() - 0.025f - float(sin(personaje.GetRotY() * 3.141592654f / 180)),
+								  -0.1 + float(sin(personaje.GetRotX() * 3.141592654f / 180)),
 								  personaje.GetCoordinateZ() - float(cos(personaje.GetRotY() * 3.141592654f / 180))
 						));
 	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180))*10);
 	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180))*10);
+	bala->SetSpeedY(+float(sin(personaje.GetRotX() * 3.141592654f / 180))*10);
 	escenas[2].AddGameObject(bala);
+}
+
+void Game::spawnEnemy() {
+	Enemigo* enemigo = new Enemigo(Vector3D(0,0,0), &personaje);
+	enemigo->SetTriangles(renderizables[2]->GetTriangles());
+	escenas[2].AddGameObject(enemigo);
+}
+
+void Game::movimientoJugador() {
+	if (wPressed) {
+		this->camera.move('w');
+	}
+	if (aPressed) {
+		this->camera.move('a');
+	}
+	if (sPressed) {
+		this->camera.move('s');
+	}
+	if (dPressed) {
+		this->camera.move('d');
+	}
 }

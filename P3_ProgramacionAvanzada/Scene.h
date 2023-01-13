@@ -23,7 +23,7 @@ private:
 public:
 	Scene(int type) :
 		tipo(type),
-		boundary(10, 5, 10)
+		boundary(20, 5, 20)
 	{}
 
 	inline vector <Solid*> GetGameObjects() { return this->gameObjects; }

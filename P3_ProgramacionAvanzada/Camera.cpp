@@ -49,7 +49,7 @@ void Camera::target(int x, int y) {
     else if (this->GetRotY() < 0) {
         this->SetRotY(360);
     }
-    this->SetRotX(this->GetRotX() + (float)diffy * 0.3);
+    this->SetRotX(this->GetRotX() + (float)diffy * 0.1);
     this->SetRotY(this->GetRotY() + (float)diffx * 0.3);
 
     glutWarpPointer(400, 300);
