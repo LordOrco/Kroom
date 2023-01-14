@@ -92,9 +92,12 @@ void Game::Init() {
 	this->camera.placeInMenu();
 
 	//Creacion de modelos
+	Model* titulo = new Model();
+	Model* puntuacion = new Model();
 	Model* cajaMedicina = new Model();
 	Model* cangrejoMalo = new Model();
 	Model* escenarioT = new Model();
+	Model* fondo = new Model();
 	Sphere* bala = new Sphere();
 
 	//Cargado de modelos
@@ -119,7 +122,25 @@ void Game::Init() {
 	*escenarioT = loader->GetModel();
 	loader->Clear();
 
+	loader->SetScale(1);
+	loader->LoadModel("..\\Assets\\Titulo.obj");
+	*titulo = loader->GetModel();
+	loader->Clear();
+
+	loader->SetScale(1);
+	loader->LoadModel("..\\Assets\\Puntuacion.obj");
+	*puntuacion = loader->GetModel();
+	loader->Clear();
+
+	loader->SetScale(4);
+	loader->LoadModel("..\\Assets\\EscenarioT.obj");
+	*fondo = loader->GetModel();
+	loader->Clear();
+
 	//Colores de modelos
+	titulo->PaintColor(Color(1, 1, 1));
+	fondo->PaintColor(Color(0.2, 0.2, 0.2));
+	puntuacion->PaintColor(Color(0, 0, 0));
 	cajaMedicina->PaintColor(Color(0.01, 1, 0.01));
 	personaje.PaintColor(Color(0.3, 0.3, 0.3));
 	cangrejoMalo->PaintColor(Color(1, 0.1, 0.1));
@@ -145,20 +166,37 @@ void Game::Init() {
 	escenarioT->SetRotY(0);
 	escenarioT->SetRotZ(0);
 
+	fondo->SetRotX(90);
+	fondo->SetCoordinateX(1);
+	fondo->SetCoordinateZ(-26);
+
+
 	//Meter los modelos en el vector de objetos para renderizar
 	renderizables.push_back(cajaMedicina);
 	renderizables.push_back(&personaje);
 	renderizables.push_back(cangrejoMalo);
 	renderizables.push_back(escenarioT);
+	renderizables.push_back(titulo);
+	renderizables.push_back(puntuacion);
+	renderizables.push_back(fondo);
 
 	//Añadir modelos a la escena
 	escenas[2].AddGameObject(renderizables[1]);
 	escenas[2].AddGameObject(renderizables[3]);
 
 	//escenas[2].AddGameObject(cajaMedicina);
-	Teapot* teapot = new Teapot();
-	teapot->SetCoordinateZ(-5);
-	escenas[1].AddGameObject(teapot);
+	titulo->SetCoordinateZ(-20);
+	titulo->SetCoordinateY(1);
+	titulo->SetCoordinateX(0);
+	escenas[1].AddGameObject(renderizables[4]);
+
+	puntuacion->SetCoordinateZ(-15);
+	puntuacion->SetCoordinateY(-2);
+	puntuacion->SetCoordinateX(0);
+	escenas[3].AddGameObject(renderizables[5]);
+
+	escenas[3].AddGameObject(renderizables[6]);
+
 
 	glutWarpPointer(400, 300);
 	spawnEnemy();
@@ -191,9 +229,9 @@ void Game::shoot() {
 								  -0.1 + float(sin(personaje.GetRotX() * 3.141592654f / 180)),
 								  personaje.GetCoordinateZ() - float(cos(personaje.GetRotY() * 3.141592654f / 180))
 						));
-	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180))*10);
-	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180))*10);
-	bala->SetSpeedY(+float(sin(personaje.GetRotX() * 3.141592654f / 180))*10);
+	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180))*25);
+	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180))*25);
+	bala->SetSpeedY(+float(sin(personaje.GetRotX() * 3.141592654f / 180))*25);
 	escenas[2].AddBullet(bala);
 }
 
@@ -229,6 +267,7 @@ void Game::collisions() {
 		if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - this->camera.GetCoordinates()).modulo() < 2) {
 			//cout << "MUEREES MUERESEESEESE" << endl;
 			escenaActual = 3;
+			this->camera.placeInMenu();
 		}
 		for (int j = 0; j < escenas[escenaActual].GetBullets().size(); j++) {
 			if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - escenas[escenaActual].GetBullets()[j]->GetCoordinates()).modulo() < 1) {
@@ -253,6 +292,7 @@ void Game::checkBoundary() {
 }
 
 void Game::newGame() {
+	this->camera.placeInMenu();
 	escenas[2].Clear();
 	personaje.reset();
 }
