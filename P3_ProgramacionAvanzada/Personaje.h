@@ -7,28 +7,21 @@ class Personaje: public Model
 {
 private:
 	Camera* camara;
-	int hp;
 	int score;
-	int ammo;
 
 public:
 
 	Personaje(Camera *camaraToSet):
 		Model(),
 		camara(camaraToSet),
-		hp(500),
-		score(0),
-		ammo(120)
+		score(0)
 	{}
 
 
-	inline int GetHP() const { return this->hp; }
 	inline int GetScore() const { return this->score; }
-	inline int GetAmmo() const { return this->ammo; }
 
-	inline void SetHP(const int& HPToSet) { this->hp = HPToSet; }
 	inline void SetScore(const int& scoreToSet) { this->score = scoreToSet; }
-	inline void SetAmmo(const int& ammoToSet) { this->ammo = ammoToSet; }
+	inline void reset() { this->SetScore(0); };
 
 	void Update(const float& time);
 };

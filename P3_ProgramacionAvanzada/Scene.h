@@ -11,44 +11,37 @@
 #include "Medicina.h"
 #include "Bala.h"
 #include "Personaje.h"
+#include "Enemigo.h"
 
 class Scene
 {
 private:
 	vector <Solid*> gameObjects;
-	Vector3D boundary;
-	int tipo;
-	void checkBoundary(Solid* object);
+	vector <Sphere*> bullets;
+	vector <Enemigo*> enemies;
 
 public:
-	Scene(int type) :
-		tipo(type),
-		boundary(20, 5, 20)
-	{}
+	Scene(){}
 
 	inline vector <Solid*> GetGameObjects() { return this->gameObjects; }
+	inline vector <Sphere*> GetBullets() { return this->bullets; }
+	inline vector <Enemigo*> GetEnemies() { return this->enemies; }
+
 	inline Solid* GetGameObject(int index) { return this->gameObjects[index]; }
-	inline Vector3D GetBoundary() const { return this->boundary; }
 	inline void SetGameObject(int index, Solid* solidToSet) { this->gameObjects[index] = solidToSet; }
+	inline void SetBullet(int index, Sphere* solidToSet) { this->bullets[index] = solidToSet; }
+	inline void SetEnemy(int index, Enemigo* solidToSet) { this->enemies[index] = solidToSet; }
+
 	inline void AddGameObject(Solid* solidToAdd) { this->gameObjects.push_back(solidToAdd); }
+	inline void AddBullet(Sphere* solidToAdd) { this->bullets.push_back(solidToAdd); }
+	inline void AddEnemy(Enemigo* solidToAdd) { this->enemies.push_back(solidToAdd); }
 
-	inline float GetBoundaryX() const { return this->boundary.GetX(); }
-	inline float GetBoundaryY() const { return this->boundary.GetY(); }
-	inline float GetBoundaryZ() const { return this->boundary.GetZ(); }
-	inline int GetTipo() const { return this->tipo; }
+	inline void DeleteGameObject(int index) { delete this->gameObjects[index]; this->gameObjects.erase(gameObjects.begin() + index);}
+	inline void DeleteBullet(int index) { delete this->bullets[index];  this->bullets.erase(bullets.begin() + index); }
+	inline void DeleteEnemy(int index) { delete this->enemies[index]; this->enemies.erase(enemies.begin() + index); }
 
-	inline void SetBoundary(const Vector3D& boundaryToSet) { this->boundary = boundaryToSet; }
-	inline void SetBoundaryX(const float& boundaryXToSet) { this->boundary.SetX(boundaryXToSet); }
-	inline void SetBoundaryY(const float& boundaryYToSet) { this->boundary.SetY(boundaryYToSet); }
-	inline void SetBoundaryZ(const float& boundaryZToSet) { this->boundary.SetZ(boundaryZToSet); }
-
-	void Init();
 	void Render();
 	void Update(const float& time);
 	void Clear();
-
-	void ProcessKeyPressed(unsigned char key, int px, int py);
-	void ProcessMouseMovement(int x, int y);
-	void ProcessMouseClick(int button, int state, int x, int y);
 };
 

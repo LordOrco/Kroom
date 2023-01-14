@@ -5,13 +5,11 @@ using namespace std;
 void Game::ProcessKeyPressed(unsigned char key, int px, int py) {
 	//cout << "Tecla pulsada " << key << endl;
 	switch (escenaActual) {
-	case 0:
-		escenaActual++;
-		break;
 	case 1:
 		switch (key) {
 		case '1':
 			SetEscenaActual(2);
+			newGame();
 			break;
 		case '2':
 			SetEscenaActual(3);
@@ -38,6 +36,10 @@ void Game::ProcessKeyPressed(unsigned char key, int px, int py) {
 			break;
 		}
 		break;
+	case 3:
+		if (key == '1') {
+			SetEscenaActual(1);
+		}
 	}
 }
 
@@ -112,6 +114,7 @@ void Game::Init() {
 	*cangrejoMalo = loader->GetModel();
 	loader->Clear();
 
+	loader->SetScale(7);
 	loader->LoadModel("..\\Assets\\EscenarioT.obj");
 	*escenarioT = loader->GetModel();
 	loader->Clear();
@@ -120,7 +123,7 @@ void Game::Init() {
 	cajaMedicina->PaintColor(Color(0.01, 1, 0.01));
 	personaje.PaintColor(Color(0.3, 0.3, 0.3));
 	cangrejoMalo->PaintColor(Color(1, 0.1, 0.1));
-	escenarioT->PaintColor(Color(0.7, 0.8, 0.8));
+	escenarioT->PaintColor(Color(0.5, 0.5, 1));
 
 	//Posiciones de modelos
 	escenarioT->SetCoordinateX(0);
@@ -148,32 +151,35 @@ void Game::Init() {
 	renderizables.push_back(cangrejoMalo);
 	renderizables.push_back(escenarioT);
 
-	//Añadir modelos a escenas
-	escenas[2].AddGameObject(&personaje);
-	escenas[2].AddGameObject(escenarioT);
-	//escenas[2].AddGameObject(cajaMedicina);
+	//Añadir modelos a la escena
+	escenas[2].AddGameObject(renderizables[1]);
+	escenas[2].AddGameObject(renderizables[3]);
 
+	//escenas[2].AddGameObject(cajaMedicina);
+	Teapot* teapot = new Teapot();
+	teapot->SetCoordinateZ(-5);
+	escenas[1].AddGameObject(teapot);
 
 	glutWarpPointer(400, 300);
-	for (int i = 0; i < escenas.size(); i++) {
-		this->escenas[i].Init();
-	}
-
 	spawnEnemy();
 }
 
 void Game::Render() {
 	this->camera.Render();
 	this->escenas[escenaActual].Render();
-	cout << "RENDER" << endl;
+	//cout << "RENDER" << endl;
 }
 
 void Game::Update() {
 	milliseconds currentTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
 	if ((currentTime.count() - this->initialMiliseconds.count()) - this->lastUpdatedTime > UPDATE_PERIOD) {
-
-		movimientoJugador();
+		if (escenaActual == 2) {
+			step();
+			movimientoJugador();
+			checkBoundary();
+			collisions();
+		}
 		this->escenas[escenaActual].Update(TIME_INCREMENT);
 		this->lastUpdatedTime = currentTime.count() - this->initialMiliseconds.count();
 	}
@@ -188,13 +194,19 @@ void Game::shoot() {
 	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180))*10);
 	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180))*10);
 	bala->SetSpeedY(+float(sin(personaje.GetRotX() * 3.141592654f / 180))*10);
-	escenas[2].AddGameObject(bala);
+	escenas[2].AddBullet(bala);
+}
+
+void Game::step() {
+	if (rand() % 50 == 0) {
+		spawnEnemy();
+	}
 }
 
 void Game::spawnEnemy() {
-	Enemigo* enemigo = new Enemigo(Vector3D(0,0,0), &personaje);
+	Enemigo* enemigo = new Enemigo(Vector3D(rand() % (61) - 30, 0, rand() % (61) - 30), &personaje); //rand()%(max-min + 1) + min
 	enemigo->SetTriangles(renderizables[2]->GetTriangles());
-	escenas[2].AddGameObject(enemigo);
+	escenas[2].AddEnemy(enemigo);
 }
 
 void Game::movimientoJugador() {
@@ -210,4 +222,37 @@ void Game::movimientoJugador() {
 	if (dPressed) {
 		this->camera.move('d');
 	}
+}
+
+void Game::collisions() {
+	for (int i = 0; i < escenas[escenaActual].GetEnemies().size(); i++) {
+		if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - this->camera.GetCoordinates()).modulo() < 2) {
+			//cout << "MUEREES MUERESEESEESE" << endl;
+			escenaActual = 3;
+		}
+		for (int j = 0; j < escenas[escenaActual].GetBullets().size(); j++) {
+			if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - escenas[escenaActual].GetBullets()[j]->GetCoordinates()).modulo() < 1) {
+				//cout << "HIT HIT HIT HIT HIT HIT HIT" << endl;
+				escenas[escenaActual].DeleteBullet(j);
+				escenas[escenaActual].GetEnemies()[i]->SetHP(escenas[escenaActual].GetEnemies()[i]->GetHP() - 1);
+				personaje.SetScore(personaje.GetScore() + 5);
+			}
+		}
+	}
+}
+
+void Game::checkBoundary() {
+	for (int i = 0; i < escenas[escenaActual].GetBullets().size(); i++) {
+		if (escenas[escenaActual].GetBullets()[i]->GetCoordinates().modulo() > GetBoundaryRadius()) {
+			escenas[escenaActual].DeleteBullet(i);
+		}
+	}
+	if (this->camera.GetCoordinates().modulo() > GetBoundaryRadius()) {
+		this->camera.SetCoordinates(Vector3D(this->camera.GetLastX(), this->camera.GetCoordinateY(), this->camera.GetLastZ()));
+	}
+}
+
+void Game::newGame() {
+	escenas[2].Clear();
+	personaje.reset();
 }

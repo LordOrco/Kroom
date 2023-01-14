@@ -8,13 +8,13 @@ class Camera : public Solid
 {
 private:
 	int lastx;
-	int lasty;
+	int lastz;
 
 public:
 	Camera(Vector3D positionArgument) :
 		Solid(positionArgument),
-		lastx(400),
-		lasty(300)
+		lastx(0),
+		lastz(0)
 	{
 		this->SetOrientation(Vector3D(0, 0, 0));
 	}
@@ -23,6 +23,9 @@ public:
 
 	void move(unsigned char key);
 	void target(int x, int y);
+
+	inline int GetLastX() { return this->lastx; };
+	inline int GetLastZ() { return this->lastz; };
 
 	void placeInPlayGround();
 	void placeInMenu();

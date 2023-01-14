@@ -7,6 +7,9 @@ void Camera::Render() {
 }
 
 void Camera::move(unsigned char key) {
+    lastx = this->GetCoordinateX();
+    lastz = this->GetCoordinateZ();
+
     switch (key) {
     case 'w':
         this->SetCoordinateX(this->GetCoordinateX() + float(sin(this->GetRotY() * 3.141592654f / 180)) * 0.15);

@@ -6,13 +6,17 @@ class Enemigo: public Model
 private:
 	int hp;
 	Model* toFollow;
+	float lastX;
+	float lastZ;
 
 public:
 
 	Enemigo(Vector3D coordenadas, Model* modelToFollow) :
-		Model(),
+		Model(coordenadas),
 		toFollow(modelToFollow),
-		hp(500)
+		hp(4),
+		lastX(coordenadas.GetX()),
+		lastZ(coordenadas.GetZ())
 	{}
 
 	inline int GetHP() const { return this->hp; }

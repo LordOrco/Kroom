@@ -20,12 +20,13 @@ private:
 	bool sPressed;
 	bool dPressed;
 
-
 	Camera camera;
 	Personaje personaje;
 	vector <Model*> renderizables;
 
 	//Control de escenas
+	int boundaryRadius;
+
 	vector <Scene> escenas;
 
 	int escenaActual;
@@ -45,13 +46,13 @@ private:
 public:
 
 	Game() :
-		escenaActual(2),
-		escenaPruebas(0),
+		escenaActual(1),
 		camera(Vector3D(0, 0, 0)),
 		personaje(&camera),
-		menuPrincipal(1),
-		juego(2),
-		resultados(3),
+		escenaPruebas(),
+		menuPrincipal(),
+		juego(),
+		resultados(),
 
 		initialMiliseconds(duration_cast<milliseconds>(system_clock::now().time_since_epoch())),
 		lastUpdatedTime(0),
@@ -59,7 +60,9 @@ public:
 		wPressed(false),
 		aPressed(false),
 		sPressed(false),
-		dPressed(false)
+		dPressed(false),
+
+		boundaryRadius(35)
 
 	{
 		escenas.push_back(escenaPruebas);
@@ -73,7 +76,9 @@ public:
 	inline Scene GetScene() const { return this->escenas[escenaActual]; }
 	inline Camera GetCamera() { return this->camera; }
 	inline int GetEscenaActual() { return this->escenaActual; }
+	inline float GetBoundaryRadius() const { return this->boundaryRadius; }
 
+	inline void SetBoundaryRadius(const float& boundaryToSet) { this->boundaryRadius = boundaryToSet; }
 	inline void SetEscenaActual(int escenaToSet) { this->escenaActual = escenaToSet; }
 
 	void Init();
@@ -85,8 +90,11 @@ public:
 	void ProcessMouseClick(int button, int state, int x, int y);
 
 	void shoot();
+	void step();
 	void spawnEnemy();
 	void movimientoJugador();
-
+	void collisions();
+	void checkBoundary();
+	void newGame();
 };
 

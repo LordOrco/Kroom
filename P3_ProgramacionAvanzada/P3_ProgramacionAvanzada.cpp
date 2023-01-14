@@ -13,9 +13,9 @@ const int WINDOW_POSITION_X = 0;
 const int WINDOW_POSITION_Y = 0;
 const char TITLE[] = "Crabs vs You";
 
-const GLclampf RED = 0.5;
-const GLclampf GREEN = 0.5;
-const GLclampf BLUE = 0.5;
+const GLclampf RED = 0;
+const GLclampf GREEN = 0;
+const GLclampf BLUE = 0.2;
 const GLclampf ALPHA = 1.0;
 
 // VARIABLES
@@ -38,6 +38,8 @@ void initGraphics() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    GLfloat lightpos[] = {0, 1, 0, 0.1};
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
     glEnable(GL_COLOR_MATERIAL);
     glClearColor(RED, GREEN, BLUE, ALPHA);
 
