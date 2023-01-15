@@ -94,7 +94,8 @@ void Game::Init() {
 	//Creacion de modelos
 	Model* titulo = new Model();
 	Model* puntuacion = new Model();
-	Model* cajaMedicina = new Model();
+	Model* mPersonaje = new Model();
+	Model* balaPowerUp = new Model();
 	Model* cangrejoMalo = new Model();
 	Model* escenarioT = new Model();
 	Model* fondo = new Model();
@@ -104,12 +105,12 @@ void Game::Init() {
 	ModelLoader* loader = new ModelLoader();
 
 	loader->LoadModel("..\\Assets\\Medicina.obj");
-	*cajaMedicina = loader->GetModel();
+	*balaPowerUp = loader->GetModel();
 	loader->Clear();
 
 	loader->SetScale(0.25);
 	loader->LoadModel("..\\Assets\\BrazosConPistola.obj");
-	personaje.SetTriangles(loader->GetModel().GetTriangles());
+	*mPersonaje = loader->GetModel();
 	loader->Clear();
 
 	loader->SetScale(1);
@@ -141,8 +142,8 @@ void Game::Init() {
 	titulo->PaintColor(Color(1, 1, 1));
 	fondo->PaintColor(Color(0.2, 0.2, 0.2));
 	puntuacion->PaintColor(Color(0, 0, 0));
-	cajaMedicina->PaintColor(Color(0.01, 1, 0.01));
-	personaje.PaintColor(Color(0.3, 0.3, 0.3));
+	balaPowerUp->PaintColor(Color(0.01, 0.5, 0.01));
+	mPersonaje->PaintColor(Color(0.3, 0.3, 0.3));
 	cangrejoMalo->PaintColor(Color(1, 0.1, 0.1));
 	escenarioT->PaintColor(Color(0.5, 0.5, 1));
 
@@ -172,8 +173,8 @@ void Game::Init() {
 
 
 	//Meter los modelos en el vector de objetos para renderizar
-	renderizables.push_back(cajaMedicina);
-	renderizables.push_back(&personaje);
+	renderizables.push_back(balaPowerUp);
+	renderizables.push_back(mPersonaje);
 	renderizables.push_back(cangrejoMalo);
 	renderizables.push_back(escenarioT);
 	renderizables.push_back(titulo);
@@ -181,10 +182,11 @@ void Game::Init() {
 	renderizables.push_back(fondo);
 
 	//Añadir modelos a la escena
-	escenas[2].AddGameObject(renderizables[1]);
+	personaje.SetTriangles(mPersonaje->GetTriangles());
+	escenas[2].AddGameObject(&personaje);
 	escenas[2].AddGameObject(renderizables[3]);
 
-	//escenas[2].AddGameObject(cajaMedicina);
+
 	titulo->SetCoordinateZ(-20);
 	titulo->SetCoordinateY(1);
 	titulo->SetCoordinateX(0);
@@ -197,9 +199,9 @@ void Game::Init() {
 
 	escenas[3].AddGameObject(renderizables[6]);
 
-
 	glutWarpPointer(400, 300);
 	spawnEnemy();
+	spawnBalaPowerUp();
 }
 
 void Game::Render() {
@@ -224,14 +226,23 @@ void Game::Update() {
 }
 
 void Game::shoot() {
-	Sphere* bala = new Sphere();
-	bala->SetCoordinates(Vector3D(personaje.GetCoordinateX() - 0.025f - float(sin(personaje.GetRotY() * 3.141592654f / 180)),
-								  -0.1 + float(sin(personaje.GetRotX() * 3.141592654f / 180)),
-								  personaje.GetCoordinateZ() - float(cos(personaje.GetRotY() * 3.141592654f / 180))
-						));
-	bala->SetSpeedX(-float(sin(personaje.GetRotY() * 3.141592654f / 180))*25);
-	bala->SetSpeedZ(-float(cos(personaje.GetRotY() * 3.141592654f / 180))*25);
-	bala->SetSpeedY(+float(sin(personaje.GetRotX() * 3.141592654f / 180))*25);
+	Vector3D balaPos(Vector3D(personaje.GetCoordinateX() - 0.025f - float(sin(personaje.GetRotY() * 3.141592654f / 180)),
+		-0.1 + float(sin(personaje.GetRotX() * 3.141592654f / 180)),
+		personaje.GetCoordinateZ() - float(cos(personaje.GetRotY() * 3.141592654f / 180))
+	));
+
+	Vector3D balaSpeed(-float(sin(personaje.GetRotY() * 3.141592654f / 180)) * 25,
+		float(sin(personaje.GetRotX() * 3.141592654f / 180)) * 25,
+		-float(cos(personaje.GetRotY() * 3.141592654f / 180)) * 25);
+
+	int balaTipo = 1;
+	if (personaje.GetBalasMejoradas() > 0) {
+		balaTipo = 2;
+		personaje.SetBalasMejoradas(personaje.GetBalasMejoradas() - 1);
+	}
+
+	Bala* bala = new Bala(balaPos, balaSpeed, balaTipo);
+
 	escenas[2].AddBullet(bala);
 }
 
@@ -239,12 +250,21 @@ void Game::step() {
 	if (rand() % 50 == 0) {
 		spawnEnemy();
 	}
+	if (rand() % 500 == 0) {
+		spawnBalaPowerUp();
+	}
 }
 
 void Game::spawnEnemy() {
 	Enemigo* enemigo = new Enemigo(Vector3D(rand() % (61) - 30, 0, rand() % (61) - 30), &personaje); //rand()%(max-min + 1) + min
 	enemigo->SetTriangles(renderizables[2]->GetTriangles());
 	escenas[2].AddEnemy(enemigo);
+}
+
+void Game::spawnBalaPowerUp() {
+	BalaPowerUp* caja = new BalaPowerUp(Vector3D(rand() % (51) - 25, -0.5, rand() % (51) - 25)); //rand()%(max-min + 1) + min
+	caja->SetTriangles(renderizables[0]->GetTriangles());
+	escenas[2].AddPowerUp(caja);
 }
 
 void Game::movimientoJugador() {
@@ -263,17 +283,27 @@ void Game::movimientoJugador() {
 }
 
 void Game::collisions() {
+
+	for (int i = 0; i < escenas[escenaActual].GetPowerUps().size(); i++) {
+		if ((escenas[escenaActual].GetPowerUps()[i]->GetCoordinates() - this->camera.GetCoordinates()).modulo() < 2) {
+			//cout << "Caja Recogida" << endl;
+			personaje.SetBalasMejoradas(personaje.GetBalasMejoradas() + escenas[escenaActual].GetPowerUps()[i]->GetBalasMejoradas());
+			escenas[escenaActual].GetPowerUps()[i]->SetActiva(false);
+		}
+	}
+
 	for (int i = 0; i < escenas[escenaActual].GetEnemies().size(); i++) {
 		if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - this->camera.GetCoordinates()).modulo() < 2) {
-			//cout << "MUEREES MUERESEESEESE" << endl;
+			//cout << "MUERTE" << endl;
 			escenaActual = 3;
 			this->camera.placeInMenu();
 		}
 		for (int j = 0; j < escenas[escenaActual].GetBullets().size(); j++) {
-			if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - escenas[escenaActual].GetBullets()[j]->GetCoordinates()).modulo() < 1) {
-				//cout << "HIT HIT HIT HIT HIT HIT HIT" << endl;
-				escenas[escenaActual].DeleteBullet(j);
-				escenas[escenaActual].GetEnemies()[i]->SetHP(escenas[escenaActual].GetEnemies()[i]->GetHP() - 1);
+			if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - escenas[escenaActual].GetBullets()[j]->GetCoordinates()).modulo() < 1.5) {
+				//cout << "HIT" << endl;
+				escenas[escenaActual].GetEnemies()[i]->PaintColor(Color(escenas[escenaActual].GetEnemies()[i]->GetTriangles()[0].GetVer1Color().GetRedComponent() - 0.2, 0.1, 0.1));
+				escenas[escenaActual].GetBullets()[j]->SetActiva(false);
+				escenas[escenaActual].GetEnemies()[i]->SetHP(escenas[escenaActual].GetEnemies()[i]->GetHP() - escenas[escenaActual].GetBullets()[j]->GetDañoBala());
 				personaje.SetScore(personaje.GetScore() + 5);
 			}
 		}

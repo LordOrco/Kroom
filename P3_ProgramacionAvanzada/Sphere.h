@@ -17,6 +17,14 @@ public:
 		slacks(20) 
 	{}
 
+	Sphere(Vector3D pos, Vector3D speed) :
+		Solid(pos, Vector3D(), Color(), speed, Vector3D()),
+		radius(0.025),
+		slices(20),
+		slacks(20)
+	{}
+
+
 	Sphere(float radiusToSet, float slicesToSet, float slackToSet):
 		radius(radiusToSet),
 		slices(slicesToSet),

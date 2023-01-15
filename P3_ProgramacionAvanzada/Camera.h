@@ -2,7 +2,6 @@
 #include "GL/freeglut.h"
 #include "Solid.h"
 #include "Text.h"
-#include "Prisma.h"
 
 class Camera : public Solid
 {

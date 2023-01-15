@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "Cube.h"
 #include "Sphere.h"
 #include "Scene.h"
 #include "Personaje.h"
 #include "Enemigo.h"
+#include "BalaPowerUp.h"
 #include <chrono>
 
 using namespace std;
@@ -92,6 +92,7 @@ public:
 	void shoot();
 	void step();
 	void spawnEnemy();
+	void spawnBalaPowerUp();
 	void movimientoJugador();
 	void collisions();
 	void checkBoundary();
