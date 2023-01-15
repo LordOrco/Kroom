@@ -11,14 +11,14 @@ private:
 
 public:
 	Sphere():
-		Solid(Vector3D(), Vector3D(), Color(0, 0, 1), Vector3D(), Vector3D()),
+		Solid(Vector3D<float>(), Vector3D<float>(), Color(0, 0, 1), Vector3D<float>(), Vector3D<float>()),
 		radius(0.025),
 		slices(20),
 		slacks(20) 
 	{}
 
-	Sphere(Vector3D pos, Vector3D speed) :
-		Solid(pos, Vector3D(), Color(), speed, Vector3D()),
+	Sphere(Vector3D<float> pos, Vector3D<float> speed) :
+		Solid(pos, Vector3D<float>(), Color(), speed, Vector3D<float>()),
 		radius(0.025),
 		slices(20),
 		slacks(20)

@@ -4,7 +4,6 @@ void Personaje::Update(const float& time) {
 
 	this->SetRotX(-this->camara->GetRotX());
 	this->SetRotY(-this->camara->GetRotY());
-	//this->SetRotZ(this->camara->GetRotZ());
 	
 	this->SetCoordinateX(this->camara->GetCoordinateX());
 	this->SetCoordinateY(0.6);
@@ -14,12 +13,12 @@ void Personaje::Update(const float& time) {
 }
 
 Bala* Personaje::shoot() {
-	Vector3D balaPos(Vector3D(this->GetCoordinateX() - 0.025f - float(sin(this->GetRotY() * 3.141592654f / 180)),
+	Vector3D<float> balaPos(Vector3D<float>(this->GetCoordinateX() - 0.025f - float(sin(this->GetRotY() * 3.141592654f / 180)),
 		-0.1 + float(sin(this->GetRotX() * 3.141592654f / 180)),
 		this->GetCoordinateZ() - float(cos(this->GetRotY() * 3.141592654f / 180))
 	));
 
-	Vector3D balaSpeed(-float(sin(this->GetRotY() * 3.141592654f / 180)) * 25,
+	Vector3D<float> balaSpeed(-float(sin(this->GetRotY() * 3.141592654f / 180)) * 25,
 		float(sin(this->GetRotX() * 3.141592654f / 180)) * 25,
 		-float(cos(this->GetRotY() * 3.141592654f / 180)) * 25);
 

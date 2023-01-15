@@ -243,13 +243,13 @@ void Game::step() {
 }
 
 void Game::spawnEnemy() {
-	Enemigo* enemigo = new Enemigo(Vector3D(rand() % (61) - 30, 0, rand() % (61) - 30), &personaje); //rand()%(max-min + 1) + min
+	Enemigo* enemigo = new Enemigo(Vector3D<float>(rand() % (61) - 30, 0, rand() % (61) - 30), &personaje); //rand()%(max-min + 1) + min
 	enemigo->SetTriangles(renderizables[2]->GetTriangles());
 	escenas[2].AddEnemy(enemigo);
 }
 
 void Game::spawnBalaPowerUp() {
-	BalaPowerUp* caja = new BalaPowerUp(Vector3D(rand() % (51) - 25, -0.5, rand() % (51) - 25)); //rand()%(max-min + 1) + min
+	BalaPowerUp* caja = new BalaPowerUp(Vector3D<float>(rand() % (51) - 25, -0.5, rand() % (51) - 25)); //rand()%(max-min + 1) + min
 	caja->SetTriangles(renderizables[0]->GetTriangles());
 	escenas[2].AddPowerUp(caja);
 }
@@ -287,12 +287,12 @@ void Game::collisions() {
 			this->camera.placeInMenu();
 		}
 		for (int j = 0; j < escenas[escenaActual].GetBullets().size(); j++) {
-			if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - escenas[escenaActual].GetBullets()[j]->GetCoordinates()).modulo() < 1.5) {
+			if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - escenas[escenaActual].GetBullets()[j]->GetCoordinates()).modulo() < 1.5 && escenas[escenaActual].GetBullets()[j]->GetActiva()) {
 				//cout << "HIT" << endl;
 				escenas[escenaActual].GetEnemies()[i]->PaintColor(Color(escenas[escenaActual].GetEnemies()[i]->GetTriangles()[0].GetVer1Color().GetRedComponent() - 0.2, 0.1, 0.1));
 				escenas[escenaActual].GetBullets()[j]->SetActiva(false);
 				escenas[escenaActual].GetEnemies()[i]->SetHP(escenas[escenaActual].GetEnemies()[i]->GetHP() - escenas[escenaActual].GetBullets()[j]->GetDañoBala());
-				personaje.SetScore(personaje.GetScore() + 5);
+				personaje.SetScore(personaje.GetScore() + 5 * escenas[escenaActual].GetBullets()[j]->GetDañoBala());
 			}
 		}
 	}
@@ -305,7 +305,7 @@ void Game::checkBoundary() {
 		}
 	}
 	if (this->camera.GetCoordinates().modulo() > GetBoundaryRadius()) {
-		this->camera.SetCoordinates(Vector3D(this->camera.GetLastX(), this->camera.GetCoordinateY(), this->camera.GetLastZ()));
+		this->camera.SetCoordinates(Vector3D<float>(this->camera.GetLastX(), this->camera.GetCoordinateY(), this->camera.GetLastZ()));
 	}
 }
 
@@ -363,13 +363,13 @@ void Game::newSave() {
 
 void Game::updateScores() {
 
-	Text* top1 = new Text(to_string(guardado.GetTop1()), Vector3D(-1.2, 0.25, -2));
-	Text* top2 = new Text(to_string(guardado.GetTop2()), Vector3D(-1.2, 0.08, -2));
-	Text* top3 = new Text(to_string(guardado.GetTop3()), Vector3D(-1.2, -0.11, -2));
-	Text* top4 = new Text(to_string(guardado.GetTop4()), Vector3D(-1.2, -0.29, -2));
-	Text* top5 = new Text(to_string(guardado.GetTop5()), Vector3D(-1.2, -0.46, -2));
-	Text* lastGame = new Text(to_string(guardado.GetLastGame()), Vector3D(0.7, 0.2, -2));
-	Text* totalGames = new Text(to_string(guardado.GetTotalGames()), Vector3D(0.7, -0.25, -2));
+	Text* top1 = new Text(to_string(guardado.GetTop1()), Vector3D<float>(-1.2, 0.25, -2));
+	Text* top2 = new Text(to_string(guardado.GetTop2()), Vector3D<float>(-1.2, 0.08, -2));
+	Text* top3 = new Text(to_string(guardado.GetTop3()), Vector3D<float>(-1.2, -0.11, -2));
+	Text* top4 = new Text(to_string(guardado.GetTop4()), Vector3D<float>(-1.2, -0.29, -2));
+	Text* top5 = new Text(to_string(guardado.GetTop5()), Vector3D<float>(-1.2, -0.46, -2));
+	Text* lastGame = new Text(to_string(guardado.GetLastGame()), Vector3D<float>(0.7, 0.2, -2));
+	Text* totalGames = new Text(to_string(guardado.GetTotalGames()), Vector3D<float>(0.7, -0.25, -2));
 
 	escenas[3].Clear();
 

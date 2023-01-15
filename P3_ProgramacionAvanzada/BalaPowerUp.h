@@ -10,7 +10,7 @@ private:
 
 public:
 
-	BalaPowerUp(Vector3D coordenadas):
+	BalaPowerUp(Vector3D<float> coordenadas):
 		Model(coordenadas),
 		activa(true),
 		balasMejoradas(10)

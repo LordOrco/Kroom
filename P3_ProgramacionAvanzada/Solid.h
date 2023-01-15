@@ -6,23 +6,24 @@
 class Solid
 {
 private:
-	Vector3D coordinates;
-	Vector3D speed;
-	Vector3D orientation;
-	Vector3D orientationSpeed;
+	Vector3D<float> coordinates;
+	Vector3D<float> speed;
+	Vector3D<float> orientation;
+	Vector3D<float> orientationSpeed;
 	Color color;
 
 public:
 
 	Solid() :
-		coordinates(Vector3D(0, 0, 0)),
-		speed(0),
-		orientation(0),
-		orientationSpeed(0),
+		coordinates(Vector3D<float>(0, 0, 0)),
+		speed(),
+		orientation(),
+		orientationSpeed(),
 		color()
 	{}
 
-	Solid(Vector3D positionArgument, Vector3D orientationArgument, Color colorArgument, Vector3D speedArgument, Vector3D orientationSpeedArgument) :
+	Solid(Vector3D<float> positionArgument, Vector3D<float> orientationArgument, Color colorArgument, 
+		  Vector3D<float> speedArgument, Vector3D<float> orientationSpeedArgument) :
 		coordinates(positionArgument),
 
 		orientation(orientationArgument),
@@ -34,32 +35,32 @@ public:
 		color(colorArgument)
 	{}
 
-	Solid(Vector3D positionArgument) :
+	Solid(Vector3D<float> positionArgument) :
 		coordinates(positionArgument),
 
-		orientation(0),
+		orientation(),
 
-		speed(0),
+		speed(),
 
-		orientationSpeed(0),
+		orientationSpeed(),
 
 		color()
 	{}
 
-	Solid(Vector3D positionArgument, Vector3D orientationArgument, Color colorArgument) :
+	Solid(Vector3D<float> positionArgument, Vector3D<float> orientationArgument, Color colorArgument) :
 		coordinates(positionArgument),
 		orientation(orientationArgument),
-		speed(0),
-		orientationSpeed(0),
+		speed(),
+		orientationSpeed(),
 		color(colorArgument)
 	{}
 
 
 	//GETTERS
-	inline Vector3D GetCoordinates() const { return this->coordinates; }
-	inline Vector3D GetSpeed() const { return this->speed; }
-	inline Vector3D GetOrientation() const { return this->orientation; }
-	inline Vector3D GetRotationSpeed() const { return this->orientationSpeed; }
+	inline Vector3D<float> GetCoordinates() const { return this->coordinates; }
+	inline Vector3D<float> GetSpeed() const { return this->speed; }
+	inline Vector3D<float> GetOrientation() const { return this->orientation; }
+	inline Vector3D<float> GetRotationSpeed() const { return this->orientationSpeed; }
 	inline Color GetColor() const { return this->color; }
 
 	inline float GetCoordinateX() const { return this->coordinates.GetX(); }
@@ -84,10 +85,10 @@ public:
 
 
 	//SETTERS
-	inline void SetCoordinates(const Vector3D& coordinatesToSet) { this->coordinates = coordinatesToSet; }
-	inline void SetSpeed(const Vector3D& speedToSet) { this->speed = speedToSet; }
-	inline void SetOrientation(const Vector3D& orientationToSet) { this->orientation = orientationToSet; }
-	inline void SetRotationSpeed(const Vector3D& rotSpeedToSet) { this->orientationSpeed = rotSpeedToSet; }
+	inline void SetCoordinates(const Vector3D<float>& coordinatesToSet) { this->coordinates = coordinatesToSet; }
+	inline void SetSpeed(const Vector3D<float>& speedToSet) { this->speed = speedToSet; }
+	inline void SetOrientation(const Vector3D<float>& orientationToSet) { this->orientation = orientationToSet; }
+	inline void SetRotationSpeed(const Vector3D<float>& rotSpeedToSet) { this->orientationSpeed = rotSpeedToSet; }
 	inline void SetColor(const Color& colorToSet) { this->color = colorToSet; }
 
 	inline void SetCoordinateX(const float& coordinateXToSet) { this->coordinates.SetX(coordinateXToSet); }

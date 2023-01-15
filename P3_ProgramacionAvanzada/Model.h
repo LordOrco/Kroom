@@ -9,9 +9,9 @@ private:
 
 public:
 
-	Model(): Solid(Vector3D(), Vector3D(), Color(), Vector3D(), Vector3D()) {};
+	Model(): Solid(Vector3D<float>(), Vector3D<float>(), Color(), Vector3D<float>(), Vector3D<float>()) {};
 
-	Model(Vector3D pos) : Solid(pos, Vector3D(), Color(), Vector3D(), Vector3D()) {};
+	Model(Vector3D<float> pos) : Solid(pos, Vector3D<float>(), Color(), Vector3D<float>(), Vector3D<float>()) {};
 
 	void AddTriangle(Triangle triangleToAdd);
 	inline vector<Triangle> GetTriangles() { return this->triangulos; };

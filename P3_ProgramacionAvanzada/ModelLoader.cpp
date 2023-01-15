@@ -8,11 +8,11 @@ void ModelLoader::LoadModel(const string& filePath) {
 			int count = 0;
 			while (getline(objFile, line)) {
 				if (line[0] == 'v' && line[1] == 'n') {
-					Vector3D normal = this->parseObjLineToVector3D(line);
+					Vector3D<float> normal = this->parseObjLineToVector3D(line);
 					this->normals.push_back(normal);
 				}
 				else if (line[0] == 'v') {
-					Vector3D vertex = this->parseObjLineToVector3D(line);
+					Vector3D<float> vertex = this->parseObjLineToVector3D(line);
 					this->calcBoundaries(vertex);
 					this->vertexes.push_back(vertex);
 				}
@@ -33,12 +33,12 @@ void ModelLoader::LoadModel(const string& filePath) {
 	}
 }
 
-Vector3D ModelLoader::parseObjLineToVector3D(const string& line) {
+Vector3D<float> ModelLoader::parseObjLineToVector3D(const string& line) {
 	string typeOfPoint;
 	float xCoordinate, yCoordinate, zCoordinate;
 	istringstream stringStream(line);
 	stringStream >> typeOfPoint >> xCoordinate >> yCoordinate >> zCoordinate;
-	Vector3D vectorPoint(xCoordinate, yCoordinate, zCoordinate);
+	Vector3D<float> vectorPoint(xCoordinate, yCoordinate, zCoordinate);
 	return vectorPoint * this->GetScale();
 }
 
@@ -52,17 +52,17 @@ Triangle ModelLoader::parseObjToTriangle(const string& line) {
 	stringStream >> idxVertex1 >> c >> c >> idxNormal1;
 	stringStream >> idxVertex2 >> c >> c >> idxNormal2;
 
-	Vector3D vertex0 = this->vertexes[idxVertex0 - 1];
-	Vector3D vertex1 = this->vertexes[idxVertex1 - 1];
-	Vector3D vertex2 = this->vertexes[idxVertex2 - 1];
-	Vector3D normal = this->normals[idxNormal0 - 1];
+	Vector3D<float> vertex0 = this->vertexes[idxVertex0 - 1];
+	Vector3D<float> vertex1 = this->vertexes[idxVertex1 - 1];
+	Vector3D<float> vertex2 = this->vertexes[idxVertex2 - 1];
+	Vector3D<float> normal = this->normals[idxNormal0 - 1];
 
 	Triangle parsedTriangle(vertex0, vertex1, vertex2, normal, normal, normal);
 
 	return parsedTriangle;
 }
 
-void ModelLoader::calcBoundaries(Vector3D vectorPoint) {
+void ModelLoader::calcBoundaries(Vector3D<float> vectorPoint) {
 	this->maxX = fmax(this->maxX, vectorPoint.GetX());
 	this->maxY = fmax(this->maxY, vectorPoint.GetY());
 	this->maxZ = fmax(this->maxZ, vectorPoint.GetZ());
@@ -73,7 +73,7 @@ void ModelLoader::calcBoundaries(Vector3D vectorPoint) {
 }
 
 Triangle ModelLoader::center(Triangle triangle) {
-	Vector3D modelCenter(
+	Vector3D<float> modelCenter(
 		this->minX + this->getWidth() / 2.0,
 		this->minY + this->getHeight() / 2.0,
 		this->minZ + this->getLength() / 2.0);

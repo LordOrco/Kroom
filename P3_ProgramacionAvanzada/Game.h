@@ -51,7 +51,7 @@ public:
 
 	Game() :
 		escenaActual(1),
-		camera(Vector3D(0, 0, 0)),
+		camera(Vector3D<float>(0, 0, 0)),
 		personaje(&camera),
 		escenaPruebas(),
 		menuPrincipal(),

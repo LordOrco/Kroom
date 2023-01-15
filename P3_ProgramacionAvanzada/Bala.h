@@ -12,7 +12,7 @@ private:
 
 public:
 
-	Bala(Vector3D pos, Vector3D speed, int pTipo):
+	Bala(Vector3D<float> pos, Vector3D<float> speed, int pTipo):
 		Sphere(pos, speed),
 		tipo(pTipo),
 		daño(pTipo),

@@ -10,12 +10,12 @@ private:
 	int lastz;
 
 public:
-	Camera(Vector3D positionArgument) :
+	Camera(Vector3D<float> positionArgument) :
 		Solid(positionArgument),
 		lastx(0),
 		lastz(0)
 	{
-		this->SetOrientation(Vector3D(0, 0, 0));
+		this->SetOrientation(Vector3D<float>(0, 0, 0));
 	}
 
 	void Render();

@@ -61,6 +61,6 @@ void Camera::target(int x, int y) {
 }
 
 void Camera::placeInMenu() {
-    this->SetCoordinates(Vector3D(0, 0, 0));
-    this->SetOrientation(Vector3D(0, 0, 0));
+    this->SetCoordinates(Vector3D<float>(0, 0, 0));
+    this->SetOrientation(Vector3D<float>(0, 0, 0));
 }

@@ -18,15 +18,15 @@ private:
 	float maxZ;
 
 	Model modelo;
-	vector<Vector3D> vertexes;
-	vector<Vector3D> normals;
+	vector<Vector3D<float>> vertexes;
+	vector<Vector3D<float>> normals;
 
 	inline float getWidth(){ return (maxX - minX); }
 	inline float getHeight(){ return (maxY - minY); }
 	inline float getLength(){ return (maxZ - minZ); }
-	void calcBoundaries(Vector3D vectorPoint);
+	void calcBoundaries(Vector3D<float> vectorPoint);
 	Triangle center(Triangle triangle);
-	Vector3D parseObjLineToVector3D(const string& line);
+	Vector3D<float> parseObjLineToVector3D(const string& line);
 	Triangle parseObjToTriangle(const string& line);
 
 public:

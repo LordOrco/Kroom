@@ -11,7 +11,7 @@ private:
 
 public:
 
-	Enemigo(Vector3D coordenadas, Model* modelToFollow) :
+	Enemigo(Vector3D<float> coordenadas, Model* modelToFollow) :
 		Model(coordenadas),
 		toFollow(modelToFollow),
 		hp(4),
