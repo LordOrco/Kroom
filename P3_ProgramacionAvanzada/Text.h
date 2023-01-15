@@ -14,12 +14,12 @@ public:
 	
 
 	Text() :
-		Solid(Vector3D<float>(), Vector3D<float>(), Color(), Vector3D<float>(), Vector3D<float>()),
+		Solid(Vector3D<float>(), Vector3D<float>(), Color(0,0,0), Vector3D<float>(), Vector3D<float>()),
 		text("The quick god jumps over the lazy brown fox.")
 	{}
 
 	Text(string pString, Vector3D<float> pPosition) :
-		Solid(pPosition, Vector3D<float>(), Color(), Vector3D<float>(), Vector3D<float>()),
+		Solid(pPosition, Vector3D<float>(), Color(0,0,0), Vector3D<float>(), Vector3D<float>()),
 		text(pString)
 	{}
 
