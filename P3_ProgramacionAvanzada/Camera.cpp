@@ -64,8 +64,3 @@ void Camera::placeInMenu() {
     this->SetCoordinates(Vector3D(0, 0, 0));
     this->SetOrientation(Vector3D(0, 0, 0));
 }
-
-void Camera::placeInPlayGround() {
-    this->SetCoordinates(Vector3D(5, 20, 30));
-    this->SetOrientation(Vector3D(45, 0, 0));
-}

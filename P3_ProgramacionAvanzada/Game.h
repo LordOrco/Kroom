@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include "FileManager.h"
 #include "Sphere.h"
 #include "Scene.h"
 #include "Personaje.h"
@@ -42,6 +43,9 @@ private:
 	
 	milliseconds initialMiliseconds;
 	long lastUpdatedTime;
+
+	//Control de guardado
+	FileManager guardado;
 
 public:
 
@@ -97,5 +101,6 @@ public:
 	void collisions();
 	void checkBoundary();
 	void newGame();
+	void saveManage();
 };
 

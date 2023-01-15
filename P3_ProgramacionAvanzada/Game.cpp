@@ -91,6 +91,9 @@ void Game::Init() {
 	//Colocacion de camara
 	this->camera.placeInMenu();
 
+	//Lectura de archivo de guardado
+	saveManage();
+
 	//Creacion de modelos
 	Model* titulo = new Model();
 	Model* puntuacion = new Model();
@@ -133,7 +136,7 @@ void Game::Init() {
 	*puntuacion = loader->GetModel();
 	loader->Clear();
 
-	loader->SetScale(4);
+	loader->SetScale(6);
 	loader->LoadModel("..\\Assets\\EscenarioT.obj");
 	*fondo = loader->GetModel();
 	loader->Clear();
@@ -296,6 +299,7 @@ void Game::collisions() {
 		if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - this->camera.GetCoordinates()).modulo() < 2) {
 			//cout << "MUERTE" << endl;
 			escenaActual = 3;
+			this->guardado.saveFile();
 			this->camera.placeInMenu();
 		}
 		for (int j = 0; j < escenas[escenaActual].GetBullets().size(); j++) {
@@ -325,4 +329,31 @@ void Game::newGame() {
 	this->camera.placeInMenu();
 	escenas[2].Clear();
 	personaje.reset();
+}
+
+void Game::saveManage() {
+	if (guardado.existFile()) {
+		guardado.loadFile();
+	}
+	else {
+		guardado.saveFile();
+	}
+
+	Text* top1 = new Text(to_string(guardado.GetTop1()), Vector3D(-1.2, 0.25, -2));
+	Text* top2 = new Text(to_string(guardado.GetTop2()), Vector3D(-1.2, 0.08, -2));
+	Text* top3 = new Text(to_string(guardado.GetTop3()), Vector3D(-1.2, -0.11, -2));
+	Text* top4 = new Text(to_string(guardado.GetTop4()), Vector3D(-1.2, -0.29, -2));
+	Text* top5 = new Text(to_string(guardado.GetTop5()), Vector3D(-1.2, -0.46, -2));
+	Text* lastGame = new Text(to_string(guardado.GetLastGame()), Vector3D(0.7, 0.2, -2));
+	Text* totalGames = new Text(to_string(guardado.GetTotalGames()), Vector3D(0.7, -0.25, -2));
+
+	escenas[3].AddGameObject(top1);
+	escenas[3].AddGameObject(top2);
+	escenas[3].AddGameObject(top3);
+	escenas[3].AddGameObject(top4);
+	escenas[3].AddGameObject(top5);
+	escenas[3].AddGameObject(lastGame);
+	escenas[3].AddGameObject(totalGames);
+
+
 }

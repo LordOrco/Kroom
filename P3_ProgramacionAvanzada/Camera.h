@@ -26,7 +26,6 @@ public:
 	inline int GetLastX() { return this->lastx; };
 	inline int GetLastZ() { return this->lastz; };
 
-	void placeInPlayGround();
 	void placeInMenu();
 };
 

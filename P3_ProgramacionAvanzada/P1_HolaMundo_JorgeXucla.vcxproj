@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemigo.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Personaje.cpp" />
     <ClCompile Include="Bala.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemigo.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="Personaje.h" />
     <ClInclude Include="Bala.h" />
     <ClInclude Include="Camera.h" />
