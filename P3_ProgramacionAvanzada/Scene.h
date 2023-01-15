@@ -15,6 +15,7 @@ private:
 	vector <Bala*> bullets;
 	vector <BalaPowerUp*> powerUps;
 	vector <Enemigo*> enemies;
+	vector <Text*> text;
 
 public:
 	Scene(){}
@@ -23,6 +24,7 @@ public:
 	inline vector <Bala*> GetBullets() { return this->bullets; }
 	inline vector <BalaPowerUp*> GetPowerUps() { return this->powerUps; }
 	inline vector <Enemigo*> GetEnemies() { return this->enemies; }
+	inline vector <Text*> GetText() { return this->text; }
 
 	inline Solid* GetGameObject(int index) { return this->gameObjects[index]; }
 
@@ -30,16 +32,20 @@ public:
 	inline void SetBullet(int index, Bala* solidToSet) { this->bullets[index] = solidToSet; }
 	inline void SetPowerUps(int index, BalaPowerUp* solidToSet) { this->powerUps[index] = solidToSet; }
 	inline void SetEnemy(int index, Enemigo* solidToSet) { this->enemies[index] = solidToSet; }
+	inline void SetText(int index, Text* solidToSet) { this->text[index] = solidToSet; }
 
 	inline void AddGameObject(Solid* solidToAdd) { this->gameObjects.push_back(solidToAdd); }
 	inline void AddBullet(Bala* solidToAdd) { this->bullets.push_back(solidToAdd); }
 	inline void AddPowerUp(BalaPowerUp* solidToAdd) { this->powerUps.push_back(solidToAdd); }
 	inline void AddEnemy(Enemigo* solidToAdd) { this->enemies.push_back(solidToAdd); }
+	inline void AddText(Text* solidToAdd) { this->text.push_back(solidToAdd); }
+
 
 	inline void DeleteGameObject(int index) { delete this->gameObjects[index]; this->gameObjects.erase(gameObjects.begin() + index);}
 	inline void DeleteBullet(int index) { delete this->bullets[index];  this->bullets.erase(bullets.begin() + index); }
 	inline void DeletePowerUp(int index) { delete this->powerUps[index];  this->powerUps.erase(powerUps.begin() + index); }
 	inline void DeleteEnemy(int index) { delete this->enemies[index]; this->enemies.erase(enemies.begin() + index); }
+	inline void DeleteText(int index) { delete this->text[index]; this->text.erase(text.begin() + index); }
 
 	void Render();
 	void Update(const float& time);

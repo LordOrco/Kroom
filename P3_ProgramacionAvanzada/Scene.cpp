@@ -13,6 +13,9 @@ void Scene::Render() {
 	for (int i = 0; i < enemies.size(); i++) {
 		enemies[i]->Render();
 	}
+	for (int i = 0; i < text.size(); i++) {
+		text[i]->Render();
+	}
 }
 
 void Scene::Update(const float& time) {
@@ -49,10 +52,14 @@ void Scene::Clear() {
 	for (BalaPowerUp* s : powerUps) {
 		delete s;
 	}
+	for (Text* s : text) {
+		delete s;
+	}
 
 	bullets.clear();
 	enemies.clear();
 	powerUps.clear();
+	text.clear();
 
 	cout << gameObjects.size();
 }

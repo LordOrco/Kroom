@@ -102,5 +102,7 @@ public:
 	void checkBoundary();
 	void newGame();
 	void saveManage();
+	void newSave();
+	void updateScores();
 };
 

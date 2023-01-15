@@ -33,6 +33,7 @@ void Game::ProcessKeyPressed(unsigned char key, int px, int py) {
 			break;
 		case 'x':
 			SetEscenaActual(1);
+			newSave();
 			break;
 		}
 		break;
@@ -299,7 +300,7 @@ void Game::collisions() {
 		if ((escenas[escenaActual].GetEnemies()[i]->GetCoordinates() - this->camera.GetCoordinates()).modulo() < 2) {
 			//cout << "MUERTE" << endl;
 			escenaActual = 3;
-			this->guardado.saveFile();
+			newSave();
 			this->camera.placeInMenu();
 		}
 		for (int j = 0; j < escenas[escenaActual].GetBullets().size(); j++) {
@@ -339,6 +340,46 @@ void Game::saveManage() {
 		guardado.saveFile();
 	}
 
+	updateScores();
+}
+
+
+void Game::newSave() {
+	guardado.SetLastGame(personaje.GetScore());
+	guardado.SetTotalGames(guardado.GetTotalGames() + 1);
+
+	if (personaje.GetScore() > guardado.GetTop1()) {
+		guardado.SetTop5(guardado.GetTop4());
+		guardado.SetTop4(guardado.GetTop3());
+		guardado.SetTop3(guardado.GetTop2());
+		guardado.SetTop2(guardado.GetTop1());
+		guardado.SetTop1(personaje.GetScore());
+	}
+	else if (personaje.GetScore() > guardado.GetTop2()) {
+		guardado.SetTop5(guardado.GetTop4());
+		guardado.SetTop4(guardado.GetTop3());
+		guardado.SetTop3(guardado.GetTop2());
+		guardado.SetTop2(personaje.GetScore());
+	}
+	else if (personaje.GetScore() > guardado.GetTop3()) {
+		guardado.SetTop5(guardado.GetTop4());
+		guardado.SetTop4(guardado.GetTop3());
+		guardado.SetTop3(personaje.GetScore());
+	}
+	else if (personaje.GetScore() > guardado.GetTop4()) {
+		guardado.SetTop5(guardado.GetTop4());
+		guardado.SetTop4(personaje.GetScore());
+	}
+	else if (personaje.GetScore() > guardado.GetTop5()) {
+		guardado.SetTop5(personaje.GetScore());
+	}
+
+	guardado.saveFile();
+	updateScores();
+}
+
+void Game::updateScores() {
+
 	Text* top1 = new Text(to_string(guardado.GetTop1()), Vector3D(-1.2, 0.25, -2));
 	Text* top2 = new Text(to_string(guardado.GetTop2()), Vector3D(-1.2, 0.08, -2));
 	Text* top3 = new Text(to_string(guardado.GetTop3()), Vector3D(-1.2, -0.11, -2));
@@ -347,13 +388,13 @@ void Game::saveManage() {
 	Text* lastGame = new Text(to_string(guardado.GetLastGame()), Vector3D(0.7, 0.2, -2));
 	Text* totalGames = new Text(to_string(guardado.GetTotalGames()), Vector3D(0.7, -0.25, -2));
 
-	escenas[3].AddGameObject(top1);
-	escenas[3].AddGameObject(top2);
-	escenas[3].AddGameObject(top3);
-	escenas[3].AddGameObject(top4);
-	escenas[3].AddGameObject(top5);
-	escenas[3].AddGameObject(lastGame);
-	escenas[3].AddGameObject(totalGames);
+	escenas[3].Clear();
 
-
+	escenas[3].AddText(top1);
+	escenas[3].AddText(top2);
+	escenas[3].AddText(top3);
+	escenas[3].AddText(top4);
+	escenas[3].AddText(top5);
+	escenas[3].AddText(lastGame);
+	escenas[3].AddText(totalGames);
 }
