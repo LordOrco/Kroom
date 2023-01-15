@@ -1,6 +1,7 @@
 #pragma once
 #include "Model.h"
 #include "Camera.h"
+#include "Bala.h"
 
 class Personaje: public Model
 {
@@ -26,6 +27,7 @@ public:
 	inline void SetScore(const int& scoreToSet) { this->score = scoreToSet; }
 
 	inline void reset() { this->SetScore(0); this->SetBalasMejoradas(0); };
+	Bala* shoot();
 
 	void Update(const float& time);
 };

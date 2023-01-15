@@ -230,24 +230,7 @@ void Game::Update() {
 }
 
 void Game::shoot() {
-	Vector3D balaPos(Vector3D(personaje.GetCoordinateX() - 0.025f - float(sin(personaje.GetRotY() * 3.141592654f / 180)),
-		-0.1 + float(sin(personaje.GetRotX() * 3.141592654f / 180)),
-		personaje.GetCoordinateZ() - float(cos(personaje.GetRotY() * 3.141592654f / 180))
-	));
-
-	Vector3D balaSpeed(-float(sin(personaje.GetRotY() * 3.141592654f / 180)) * 25,
-		float(sin(personaje.GetRotX() * 3.141592654f / 180)) * 25,
-		-float(cos(personaje.GetRotY() * 3.141592654f / 180)) * 25);
-
-	int balaTipo = 1;
-	if (personaje.GetBalasMejoradas() > 0) {
-		balaTipo = 2;
-		personaje.SetBalasMejoradas(personaje.GetBalasMejoradas() - 1);
-	}
-
-	Bala* bala = new Bala(balaPos, balaSpeed, balaTipo);
-
-	escenas[2].AddBullet(bala);
+	escenas[2].AddBullet(personaje.shoot());
 }
 
 void Game::step() {
